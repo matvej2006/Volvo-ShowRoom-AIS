@@ -11,6 +11,5 @@ test_drives
 users
 
 sales
-contracts
 
 activity_log
