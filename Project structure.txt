@@ -1,0 +1,52 @@
+volvo-dealership/
+│
+├── index.php                  # Каталог авто (главная)
+├── car.php                    # Карточка авто
+├── test-drive.php             # Запись на тест-драйв
+├── contacts.php               # Контакты
+│
+├── login.php                  # Вход
+├── register.php               # Регистрация клиента
+├── logout.php                 # Выход
+├── profile.php                # Личный кабинет
+│
+├── 403.php                    # Нет доступа
+├── 404.php                    # Не найдено
+│
+├── /admin                     # Панель сотрудников
+│   ├── index.php              # Дашборд
+│   ├── cars.php               # Список авто
+│   ├── car-form.php           # Добавить/редактировать
+│   ├── car-delete.php         # Удалить
+│   ├── leads.php              # Заявки на тест-драйв
+│   ├── sales.php              # Продажи
+│   ├── sale-form.php          # Оформление продажи
+│   ├── clients.php            # Клиенты
+│   ├── users.php              # Сотрудники (только админ)
+│   └── user-form.php          # Создать сотрудника
+│
+├── /config
+│   ├── db.php                 # Подключение к MySQL
+│   ├── auth.php               # Функции авторизации
+│   └── functions.php          # Утилиты (e, redirect, flash)
+│
+├── /includes
+│   ├── header.php             # Шапка сайта
+│   ├── footer.php             # Подвал
+│   └── admin-header.php       # Шапка админки + меню
+│
+├── /assets
+│   ├── /css
+│   │   ├── style.css
+│   │   └── admin.css
+│   ├── /js
+│   │   └── main.js
+│   ├── /images
+│   └── /uploads               # Фото машин
+│
+├── /sql
+│   └── dump.sql               # База + тестовые данные
+│
+├── .htaccess
+├── .gitignore
+└── README.md
