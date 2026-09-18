@@ -1,0 +1,16 @@
+Tables:
+
+cars 
+car_config
+car_models
+car_images
+
+bookings
+test_drives
+
+users
+
+sales
+contracts
+
+activity_log
