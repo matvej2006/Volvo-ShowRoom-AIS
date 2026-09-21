@@ -5,7 +5,7 @@ declare(strict_types=1);
 // Экранирование вывода (XSS)
 function e($value): string
 {
-    return htmlspecialchars($value ?? '', ENT_QUOTES | ENT_SUBSTITUTE | ENT_HTML401, 'UTF-8');
+    return htmlspecialchars($value ?? '', ENT_QUOTES | ENT_SUBSTITUTE | ENT_HTML5, 'UTF-8');
 }
 
 // Редирект и остановка скрипта.
@@ -51,7 +51,7 @@ function csrf_field(): string
 }
 
 // Проверка CSRF. Бросает исключение при несовпадении.
-function csrf_ckeck(): void
+function csrf_check(): void
 {
     if (session_status() !== PHP_SESSION_ACTIVE) {
         session_start();
