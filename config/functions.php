@@ -88,7 +88,7 @@ function clear_old(): void
 // Записать действие в журнал.
 function log_action(string $action, ?string $entity = null, ?int $entityId = null): void
 {
-    $userId = $_SESSION['user']['id'] ?? $_SESSION['client']['id'] ?? null;
+    $userId = $_SESSION['user']['id'] ?? null;
 
     $stmt = db()->prepare(
         'INSERT INTO activity_log (user_id, action, entity, entity_id)

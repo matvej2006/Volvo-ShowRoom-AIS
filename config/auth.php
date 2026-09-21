@@ -9,9 +9,7 @@ if (session_status() !== PHP_SESSION_ACTIVE) {
     session_start();
 }
 
-/* ---------- СОТРУДНИКИ ---------- */
-
-function auth_login_user(string $email, string $password): bool
+function auth_login(string $email, string $password): bool
 {
     $stmt = db()->prepare('SELECT * FROM users WHERE email = ? AND is_active = 1 LIMIT 1');
     $stmt->execute([$email]);
@@ -46,6 +44,16 @@ function is_admin(): bool
     return (current_user()['role'] ?? null) === 'admin';
 }
 
+function is_manager(): bool
+{
+    return (current_user()['role'] ?? null) === 'manager';
+}
+
+function is_client(): bool
+{
+    return (current_user()['role'] ?? null) === 'client';
+}
+
 function require_login(): void
 {
     if (!is_logged()) {
@@ -62,46 +70,20 @@ function require_role(string ...$roles): void
     }
 }
 
-/* ---------- КЛИЕНТЫ ---------- */
-
-function auth_login_client(string $email, string $password): bool
+function require_admin(): void
 {
-    $stmt = db()->prepare('SELECT * FROM clients WHERE email = ? LIMIT 1');
-    $stmt->execute([$email]);
-    $client = $stmt->fetch();
-
-    if (!$client || !password_verify($password, $client['password_hash'])) {
-        return false;
-    }
-
-    $_SESSION['client'] = [
-        'id'    => (int)$client['id'],
-        'name'  => $client['name'],
-        'email' => $client['email'],
-    ];
-    session_regenerate_id(true);
-    return true;
+    require_role('admin');
 }
 
-function current_client(): ?array
+function require_manager(): void
 {
-    return $_SESSION['client'] ?? null;
-}
-
-function is_client_logged(): bool
-{
-    return isset($_SESSION['client']);
+    require_role('manager', 'admin');
 }
 
 function require_client(): void
 {
-    if (!is_client_logged()) {
-        flash('error', 'Войдите в личный кабинет');
-        redirect('/login.php');
-    }
+    require_role('client');
 }
-
-/* ---------- ОБЩЕЕ ---------- */
 
 function auth_logout(): void
 {
