@@ -1,3 +1,7 @@
 .kilo/
 .env
-test.php
+/assets/uploads/*
+!/assets/uploads/.gitkeep
+.vscode/
+!.vscode/settings.json
+/vendor/

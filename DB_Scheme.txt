@@ -1,7 +1,7 @@
 Tables:
 
 cars 
-car_config
+car_configs
 car_models
 car_images
 
