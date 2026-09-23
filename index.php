@@ -10,48 +10,20 @@
 
 <body>
 
-    <header class="header" id="header">
-        <div class="container">
-            <nav class="nav">
-                <a href="/" class="nav-logo">
-                    <svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
-                        <circle cx="50" cy="50" r="45" fill="none" stroke="currentColor" stroke-width="3" />
-                        <line x1="50" y1="5" x2="50" y2="95" stroke="currentColor" stroke-width="3" />
-                        <line x1="5" y1="50" x2="95" y2="50" stroke="currentColor" stroke-width="3" />
-                        <line x1="17" y1="17" x2="83" y2="83" stroke="currentColor" stroke-width="2" />
-                    </svg>
-                    Volvo
-                </a>
-                <ul class="nav-menu" id="navMenu">
-                    <li><a href="#models">Модели</a></li>
-                    <li><a href="#electric">Электрификация</a></li>
-                    <li><a href="#safety">Безопасность</a></li>
-                    <li><a href="#services">Сервис</a></li>
-                    <li><a href="#contact">Контакты</a></li>
-                </ul>
-                <div class="nav-actions">
-                    <a href="#test-drive">Тест-драйв</a>
-                    <a href="#configurator" class="btn btn-primary" style="padding: 10px 24px; font-size: 12px;">Конфигуратор</a>
-                </div>
-                <button class="mobile-toggle" id="mobileToggle" aria-label="Меню">
-                    <span></span>
-                    <span></span>
-                    <span></span>
-                </button>
-            </nav>
-        </div>
-    </header>
+    <?php
+    require "includes/header.php";
+    ?>
 
     <section class="hero">
         <div class="hero-bg"></div>
         <div class="hero-overlay"></div>
         <div class="hero-content">
             <span class="hero-badge">Новый 2026</span>
-            <h1>Создан для <strong>вашей жизни</strong></h1>
+            <h1>Создан для вашей жизни</h1>
             <p>Откройте линейку автомобилей Volvo, где скандинавский дизайн сочетается с передовыми технологиями безопасности и электрической мощностью.</p>
             <div class="hero-buttons">
-                <a href="#models" class="btn btn-primary">Исследовать модели</a>
-                <a href="#test-drive" class="btn btn-outline">Записаться на тест-драйв</a>
+                <button onclick="location.href='#models'" class="btn btn-primary">Исследовать модели</button>
+                <button onclick="location.href='#test-drive'" class="btn btn-outline">Записаться на тест-драйв</button>
             </div>
         </div>
         <div class="hero-scroll">
@@ -93,8 +65,8 @@
                         </div>
                         <p class="model-price">от <span>₽ 9 490 000</span></p>
                         <div class="model-actions">
-                            <a href="#" class="btn btn-dark">Подробнее</a>
-                            <a href="#" class="btn btn-outline-dark">Конфигуратор</a>
+                            <button onclick="location.href='#'" class="btn btn-dark">Подробнее</button>
+                            <button onclick="location.href='#'" class="btn btn-outline-dark">Конфигуратор</button>
                         </div>
                     </div>
                 </div>
@@ -122,8 +94,8 @@
                         </div>
                         <p class="model-price">от <span>₽ 7 890 000</span></p>
                         <div class="model-actions">
-                            <a href="#" class="btn btn-dark">Подробнее</a>
-                            <a href="#" class="btn btn-outline-dark">Конфигуратор</a>
+                            <button onclick="location.href='#'" class="btn btn-dark">Подробнее</button>
+                            <button onclick="location.href='#'" class="btn btn-outline-dark">Конфигуратор</button>
                         </div>
                     </div>
                 </div>
@@ -151,8 +123,8 @@
                         </div>
                         <p class="model-price">от <span>₽ 5 490 000</span></p>
                         <div class="model-actions">
-                            <a href="#" class="btn btn-dark">Подробнее</a>
-                            <a href="#" class="btn btn-outline-dark">Конфигуратор</a>
+                            <button onclick="location.href='#'" class="btn btn-dark">Подробнее</button>
+                            <button onclick="location.href='#'" class="btn btn-outline-dark">Конфигуратор</button>
                         </div>
                     </div>
                 </div>
@@ -181,8 +153,8 @@
                         </div>
                         <p class="model-price">от <span>₽ 5 190 000</span></p>
                         <div class="model-actions">
-                            <a href="#" class="btn btn-dark">Подробнее</a>
-                            <a href="#" class="btn btn-outline-dark">Конфигуратор</a>
+                            <button onclick="location.href='#'" class="btn btn-dark">Подробнее</button>
+                            <button onclick="location.href='#'" class="btn btn-outline-dark">Конфигуратор</button>
                         </div>
                     </div>
                 </div>
@@ -210,8 +182,8 @@
                         </div>
                         <p class="model-price">от <span>₽ 4 690 000</span></p>
                         <div class="model-actions">
-                            <a href="#" class="btn btn-dark">Подробнее</a>
-                            <a href="#" class="btn btn-outline-dark">Конфигуратор</a>
+                            <button onclick="location.href='#'" class="btn btn-dark">Подробнее</button>
+                            <button onclick="location.href='#'" class="btn btn-outline-dark">Конфигуратор</button>
                         </div>
                     </div>
                 </div>
@@ -240,8 +212,8 @@
                         </div>
                         <p class="model-price">от <span>₽ 3 990 000</span></p>
                         <div class="model-actions">
-                            <a href="#" class="btn btn-dark">Подробнее</a>
-                            <a href="#" class="btn btn-outline-dark">Конфигуратор</a>
+                            <button onclick="location.href='#'" class="btn btn-dark">Подробнее</button>
+                            <button onclick="location.href='#'" class="btn btn-outline-dark">Конфигуратор</button>
                         </div>
                     </div>
                 </div>
@@ -259,7 +231,7 @@
             <h2 class="section-title">Полностью электрическое <strong>будущее</strong></h2>
             <p>Volvo стремится к полному переходу на электромобили к 2030 году. Наши полностью электрические модели предлагают нулевой уровень выбросов, мгновенный крутящий момент и бесшумное вождение — без компромиссов в области безопасности и комфорта.</p>
             <div>
-                <a href="#" class="btn btn-dark">Узнать больше об электромобилях</a>
+                <button onclick="location.href='#'" class="btn btn-dark">Узнать больше об электромобилях</button>
             </div>
         </div>
     </section>
@@ -320,7 +292,7 @@
         <div class="banner-content">
             <h2>Запишитесь на <strong>тест-драйв</strong></h2>
             <p>Почувствуйте скандинавскую роскошь и мощность Volvo лично. Запишитесь на бесплатный тест-драйв в нашем автосалоне.</p>
-            <a href="#" class="btn btn-primary">Записаться сейчас</a>
+            <button href="#" class="btn btn-primary">Записаться сейчас</button>
         </div>
     </section>
 
@@ -372,7 +344,7 @@
             <h2 class="section-title" style="color: var(--volvo-white);">Создайте свой <strong>идеальный Volvo</strong></h2>
             <p style="color: rgba(255,255,255,0.8);">Выберите модель, цвет кузова, отделку салона, колёсные диски и дополнительные опции. Соберите автомобиль мечты в нашем онлайн-конфигураторе.</p>
             <div>
-                <a href="#" class="btn btn-primary">Открыть конфигуратор</a>
+                <button href="#" class="btn btn-primary">Открыть конфигуратор</button>
             </div>
         </div>
         <div class="split-image">
@@ -380,60 +352,9 @@
         </div>
     </section>
 
-    <footer class="footer" id="contact">
-        <div class="container">
-            <div class="footer-grid">
-                <div class="footer-brand">
-                    <h3>Volvo</h3>
-                    <p>Официальный дилерский центр Volvo. Скандинавская роскошь, безопасность и инновации с 1927 года.</p>
-                    <div class="footer-social">
-                        <a href="#" aria-label="Telegram">TG</a>
-                        <a href="#" aria-label="VKontakte">VK</a>
-                        <a href="#" aria-label="YouTube">YT</a>
-                    </div>
-                </div>
-                <div class="footer-col">
-                    <h4>Модели</h4>
-                    <ul>
-                        <li><a href="#">EX90</a></li>
-                        <li><a href="#">EX30</a></li>
-                        <li><a href="#">XC90</a></li>
-                        <li><a href="#">XC60</a></li>
-                        <li><a href="#">S90</a></li>
-                        <li><a href="#">V60</a></li>
-                    </ul>
-                </div>
-                <div class="footer-col">
-                    <h4>Покупателям</h4>
-                    <ul>
-                        <li><a href="#">Конфигуратор</a></li>
-                        <li><a href="#">Тест-драйв</a></li>
-                        <li><a href="#">Trade-In</a></li>
-                        <li><a href="#">Кредитование</a></li>
-                        <li><a href="#">Лизинг</a></li>
-                        <li><a href="#">Страхование</a></li>
-                    </ul>
-                </div>
-                <div class="footer-col">
-                    <h4>Контакты</h4>
-                    <ul>
-                        <li><a href="tel:+78001234567">8 (800) 123-45-67</a></li>
-                        <li><a href="mailto:info@volvo-showroom.ru">info@volvo-showroom.ru</a></li>
-                        <li><a href="#">г. Москва, ул. Примерная, 1</a></li>
-                        <li><a href="#">Пн-Вс: 9:00 — 21:00</a></li>
-                    </ul>
-                </div>
-            </div>
-            <div class="footer-bottom">
-                <p>&copy; 2026 Volvo Car Showroom. Все права защищены.</p>
-                <div class="footer-bottom-links">
-                    <a href="#">Политика конфиденциальности</a>
-                    <a href="#">Условия использования</a>
-                    <a href="#">Cookies</a>
-                </div>
-            </div>
-        </div>
-    </footer>
+    <?php
+    require "includes/footer.php";
+    ?>
 
     <script>
         const header = document.getElementById('header');
