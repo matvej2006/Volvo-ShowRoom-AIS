@@ -1,0 +1,140 @@
+.error-page {
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: linear-gradient(135deg, #0a1628 0%, #1a2a3a 50%, #0d1f33 100%);
+    position: relative;
+    overflow: hidden;
+}
+
+.error-page::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: radial-gradient(ellipse at 50% 50%, rgba(0, 105, 180, 0.08) 0%, transparent 70%);
+    pointer-events: none;
+}
+
+.error-glass {
+    position: relative;
+    z-index: 2;
+    text-align: center;
+    padding: 80px 60px;
+    max-width: 600px;
+    margin: 0 24px;
+    background: rgba(255, 255, 255, 0.06);
+    backdrop-filter: blur(40px) saturate(180%);
+    -webkit-backdrop-filter: blur(40px) saturate(180%);
+    border: 1px solid rgba(255, 255, 255, 0.12);
+    border-radius: 32px;
+    box-shadow:
+        0 20px 60px rgba(0, 0, 0, 0.2),
+        inset 0 1px 0 rgba(255, 255, 255, 0.1);
+}
+
+.error-glass::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 1px;
+    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.3), transparent);
+    border-radius: 32px 32px 0 0;
+}
+
+.error-code {
+    font-size: clamp(80px, 15vw, 140px);
+    font-weight: 700;
+    color: rgba(255, 255, 255, 0.08);
+    line-height: 1;
+    margin-bottom: 20px;
+    letter-spacing: -4px;
+    user-select: none;
+}
+
+.error-icon {
+    width: 72px;
+    height: 72px;
+    margin: 0 auto 24px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: rgba(255, 59, 48, 0.1);
+    border-radius: 20px;
+    border: 1px solid rgba(255, 59, 48, 0.2);
+}
+
+.error-icon svg {
+    width: 36px;
+    height: 36px;
+    stroke: #ff3b30;
+    fill: none;
+    stroke-width: 1.5;
+}
+
+.error-title {
+    font-size: clamp(24px, 4vw, 36px);
+    font-weight: 300;
+    color: var(--volvo-white);
+    margin-bottom: 16px;
+    line-height: 1.2;
+    letter-spacing: -0.5px;
+}
+
+.error-title strong {
+    font-weight: 700;
+}
+
+.error-text {
+    font-size: 16px;
+    color: rgba(255, 255, 255, 0.6);
+    line-height: 1.7;
+    margin-bottom: 40px;
+    max-width: 420px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.error-actions {
+    display: flex;
+    gap: 12px;
+    justify-content: center;
+    flex-wrap: wrap;
+}
+
+.error-logo {
+    position: absolute;
+    top: 24px;
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 3;
+}
+
+.error-logo a {
+    color: var(--volvo-white);
+    background: rgba(255, 255, 255, 0.06);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 20px;
+    padding: 15px 20px;
+}
+
+.error-logo svg {
+    width: 28px;
+    height: 28px;
+}
+
+@media (max-width: 768px) {
+    .error-glass {
+        padding: 48px 28px;
+        border-radius: 24px;
+    }
+
+    .error-actions {
+        flex-direction: column;
+        align-items: center;
+    }
+}

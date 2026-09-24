@@ -103,7 +103,7 @@ img {
   padding: 0 24px;
 }
 
-.nav-logo{
+.nav-logo {
   width: 150px;
 }
 
@@ -167,11 +167,9 @@ img {
   inset: 0;
   border-radius: inherit;
   padding: 1px;
-  background: linear-gradient(
-    135deg,
-    rgba(255, 255, 255, 0.3),
-    rgba(255, 255, 255, 0)
-  );
+  background: linear-gradient(135deg,
+      rgba(255, 255, 255, 0.3),
+      rgba(255, 255, 255, 0));
   mask:
     linear-gradient(#fff 0 0) content-box,
     linear-gradient(#fff 0 0);
@@ -268,19 +266,16 @@ img {
 .hero-bg {
   position: absolute;
   inset: 0;
-  background: url("https://images.unsplash.com/photo-1617814076367-b759c7d7e738?w=1920&q=80")
-    center/cover no-repeat;
+  background: url("https://images.unsplash.com/photo-1617814076367-b759c7d7e738?w=1920&q=80") center/cover no-repeat;
   opacity: 0.5;
 }
 
 .hero-overlay {
   position: absolute;
   inset: 0;
-  background: linear-gradient(
-    to bottom,
-    rgba(0, 0, 0, 0.2) 0%,
-    rgba(0, 0, 0, 0.5) 100%
-  );
+  background: linear-gradient(to bottom,
+      rgba(0, 0, 0, 0.2) 0%,
+      rgba(0, 0, 0, 0.5) 100%);
 }
 
 .hero-content {
@@ -332,7 +327,6 @@ img {
 .hero p {
   font-size: 18px;
   color: rgba(255, 255, 255, 0.75);
-  margin-bottom: 40px;
   max-width: 600px;
   margin-left: auto;
   margin-right: auto;
@@ -372,6 +366,7 @@ img {
 }
 
 @keyframes bounce {
+
   0%,
   20%,
   50%,
@@ -379,9 +374,11 @@ img {
   100% {
     transform: translateX(-50%) translateY(0);
   }
+
   40% {
     transform: translateX(-50%) translateY(-10px);
   }
+
   60% {
     transform: translateX(-50%) translateY(-5px);
   }
@@ -458,12 +455,10 @@ img {
   left: 0;
   right: 0;
   height: 1px;
-  background: linear-gradient(
-    90deg,
-    transparent,
-    rgba(255, 255, 255, 0.8),
-    transparent
-  );
+  background: linear-gradient(90deg,
+      transparent,
+      rgba(255, 255, 255, 0.8),
+      transparent);
   z-index: 1;
 }
 
@@ -627,11 +622,9 @@ img {
   content: "";
   position: absolute;
   inset: 0;
-  background: radial-gradient(
-    ellipse at 30% 50%,
-    rgba(0, 105, 180, 0.08) 0%,
-    transparent 70%
-  );
+  background: radial-gradient(ellipse at 30% 50%,
+      rgba(0, 105, 180, 0.08) 0%,
+      transparent 70%);
   pointer-events: none;
 }
 
@@ -680,12 +673,10 @@ img {
   left: 0;
   right: 0;
   height: 1px;
-  background: linear-gradient(
-    90deg,
-    transparent,
-    rgba(255, 255, 255, 0.2),
-    transparent
-  );
+  background: linear-gradient(90deg,
+      transparent,
+      rgba(255, 255, 255, 0.2),
+      transparent);
 }
 
 .feature-item {
@@ -762,12 +753,10 @@ img {
   left: 0;
   right: 0;
   height: 1px;
-  background: linear-gradient(
-    90deg,
-    transparent,
-    rgba(255, 255, 255, 0.8),
-    transparent
-  );
+  background: linear-gradient(90deg,
+      transparent,
+      rgba(255, 255, 255, 0.8),
+      transparent);
 }
 
 .service-card::after {
@@ -777,11 +766,9 @@ img {
   left: -50%;
   width: 200%;
   height: 200%;
-  background: radial-gradient(
-    circle,
-    rgba(255, 255, 255, 0.1) 0%,
-    transparent 60%
-  );
+  background: radial-gradient(circle,
+      rgba(255, 255, 255, 0.1) 0%,
+      transparent 60%);
   opacity: 0;
   transition: var(--transition);
   pointer-events: none;
@@ -848,11 +835,9 @@ img {
   content: "";
   position: absolute;
   inset: 0;
-  background: radial-gradient(
-    ellipse at center,
-    rgba(0, 105, 180, 0.15) 0%,
-    transparent 70%
-  );
+  background: radial-gradient(ellipse at center,
+      rgba(0, 105, 180, 0.15) 0%,
+      transparent 70%);
 }
 
 .banner-content {

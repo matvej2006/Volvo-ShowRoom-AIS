@@ -18,13 +18,9 @@
         <div class="hero-bg"></div>
         <div class="hero-overlay"></div>
         <div class="hero-content">
-            <span class="hero-badge">Новый 2026</span>
+            <span class="hero-badge">Новый Volvo XC60 2026</span>
             <h1>Создан для вашей жизни</h1>
             <p>Откройте линейку автомобилей Volvo, где скандинавский дизайн сочетается с передовыми технологиями безопасности и электрической мощностью.</p>
-            <div class="hero-buttons">
-                <button onclick="location.href='#models'" class="btn btn-primary">Исследовать модели</button>
-                <button onclick="location.href='#test-drive'" class="btn btn-outline">Записаться на тест-драйв</button>
-            </div>
         </div>
         <div class="hero-scroll">
             <span>Прокрутите вниз</span>
