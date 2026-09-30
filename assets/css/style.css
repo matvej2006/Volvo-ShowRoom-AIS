@@ -259,7 +259,7 @@ img {
 .hero-bg {
   position: absolute;
   inset: 0;
-  background: url("../images/new_hero_xc60.jpg") center/cover no-repeat fixed;
+  background: url("../images/new_hero_xc60.jpg") center/cover no-repeat;
   opacity: 0.65;
 }
 
