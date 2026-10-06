@@ -1,0 +1,67 @@
+# Кодировка по умолчанию для всех текстовых ответов
+AddDefaultCharset UTF-8
+
+# Отключаем листинг директорий — нельзя посмотреть содержимое папки
+Options -Indexes
+
+# Запрещаем отдавать серверную подпись в заголовках
+ServerSignature Off
+
+# 1. ЗАЩИТА СЛУЖЕБНЫХ ПАПОК
+# Любое обращение к /config/, /includes/, /sql/ → ошибка 403
+RewriteEngine On
+RewriteRule ^(config|includes|sql)/ - [F,L]
+
+# Дополнительно: прямой доступ к .env, .git и дампам
+<FilesMatch "^\.(env|git|htaccess|gitignore)$">
+    Require all denied
+</FilesMatch>
+<FilesMatch "\.(sql|log|bak|ini)$">
+    Require all denied
+</FilesMatch>
+
+# 2. ЧПУ — красивые ссылки
+# /car/5  →  /car.php?id=5
+RewriteRule ^car/([0-9]+)/?$ car.php?id=$1 [L,QSA]
+
+# /admin/cars/5/edit  →  /admin/car-form.php?id=5 (пример)
+# (можно добавить по аналогии, если нужно)
+
+# Если файла нет и это не папка — ничего не делаем
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME} !-d
+
+# 3. СТРАНИЦЫ ОШИБОК
+ErrorDocument 403 /403.php
+ErrorDocument 404 /404.php
+
+# 4. КЕШИРОВАНИЕ СТАТИКИ
+<IfModule mod_expires.c>
+    ExpiresActive On
+    ExpiresByType image/jpeg  "access plus 1 month"
+    ExpiresByType image/png   "access plus 1 month"
+    ExpiresByType image/svg+xml "access plus 1 month"
+    ExpiresByType image/webp  "access plus 1 month"
+    ExpiresByType text/css    "access plus 1 week"
+    ExpiresByType application/javascript "access plus 1 week"
+    ExpiresByType font/woff2  "access plus 1 month"
+</IfModule>
+
+# 5. СЖАТИЕ ОТВЕТОВ
+<IfModule mod_deflate.c>
+    AddOutputFilterByType DEFLATE text/html text/plain text/css
+    AddOutputFilterByType DEFLATE application/javascript application/json
+    AddOutputFilterByType DEFLATE image/svg+xml
+</IfModule>
+
+# 6. БЕЗОПАСНЫЕ ЗАГОЛОВКИ
+<IfModule mod_headers.c>
+    Header set X-Content-Type-Options "nosniff"
+    Header set X-Frame-Options "SAMEORIGIN"
+    Header set Referrer-Policy "strict-origin-when-cross-origin"
+</IfModule>
+
+# 7. ЗАПРЕТ ОПАСНЫХ HTTP-МЕТОДОВ
+<LimitExcept GET POST HEAD>
+    Require all denied
+</LimitExcept>

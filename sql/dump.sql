@@ -228,7 +228,7 @@ INSERT INTO car_config (car_id, engine, engine_volume, power_hp, transmission, f
 -- =========================================================
 -- ПРЕДСТАВЛЕНИЕ ДЛЯ ОТЧЁТА О ПРОДАЖАХ (опционально)
 -- =========================================================
-CREATE OR REPLACE VIEW v_sales_full AS
+CREATE OR REPLACE VIEW sales_report AS
 SELECT
     s.id                AS sale_id,
     s.contract_number,
