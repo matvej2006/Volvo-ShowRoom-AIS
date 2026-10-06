@@ -1,0 +1,23 @@
+# =========================================================
+# /assets/uploads/.htaccess — защита загрузок
+# =========================================================
+
+# Полностью отключаем выполнение PHP и других скриптов
+php_flag engine off
+
+# На всякий случай убираем обработчики для опасных расширений
+RemoveHandler .php .phtml .phar .php3 .php4 .php5 .php7 .php8
+RemoveType .php .phtml .phar
+
+# Запрещаем прямой доступ к скриптам, если они каким-то образом попали сюда
+<FilesMatch "\.(php|phtml|phar|pl|py|cgi|asp|aspx|sh|exe)$">
+    Require all denied
+</FilesMatch>
+
+# Разрешаем только изображения
+<FilesMatch "\.(jpg|jpeg|png|webp|gif|svg)$">
+    Require all granted
+</FilesMatch>
+
+# Отключаем листинг директории
+Options -Indexes

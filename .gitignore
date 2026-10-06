@@ -2,6 +2,7 @@
 .env
 /assets/uploads/*
 !/assets/uploads/.gitkeep
+!/assets/uploads/.htaccess
 .vscode/
 !.vscode/settings.json
 /vendor/
