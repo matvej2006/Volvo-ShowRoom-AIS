@@ -5,8 +5,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>404 — Страница не найдена | VolvoCarsBy</title>
-    <link rel="stylesheet" href="assets/css/style.css">
-    <link rel="stylesheet" href="assets/css/403_404_style.css">
+    <link rel="stylesheet" href="/Volvo_Showroom/assets/css/style.css">
+    <link rel="stylesheet" href="/Volvo_Showroom/assets/css/403_404_style.css">
 </head>
 
 <body>
@@ -14,7 +14,7 @@
     <header class="error-logo" id="header">
         <div class="container">
             <nav class="nav">
-                <a href="index.php"><img src="assets/images/volvo_new_logo-freelogovectors.net_.png" alt="" class="nav-logo"></a>
+                <a href="index.php"><img src="/Volvo_Showroom/assets/images/volvo_new_logo-freelogovectors.net_.png" alt="" class="nav-logo"></a>
             </nav>
         </div>
     </header>

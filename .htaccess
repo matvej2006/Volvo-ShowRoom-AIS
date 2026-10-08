@@ -1,67 +1,62 @@
-# Кодировка по умолчанию для всех текстовых ответов
+# Кодировка ответов по умолчанию
 AddDefaultCharset UTF-8
 
-# Отключаем листинг директорий — нельзя посмотреть содержимое папки
-Options -Indexes
+# Запрет листинга директорий
+    Options -Indexes
 
-# Запрещаем отдавать серверную подпись в заголовках
+# Не светить версию Apache в заголовках
 ServerSignature Off
 
-# 1. ЗАЩИТА СЛУЖЕБНЫХ ПАПОК
-# Любое обращение к /config/, /includes/, /sql/ → ошибка 403
+# Включаем mod_rewrite и задаём базовый путь
 RewriteEngine On
-RewriteRule ^(config|includes|sql)/ - [F,L]
+RewriteBase /
 
-# Дополнительно: прямой доступ к .env, .git и дампам
+# Блокируем прямой доступ к служебным папкам
+RewriteRule ^(admin|config|includes|sql)/ - [F,L]
+
+# Запрет доступа к скрытым и служебным файлам
 <FilesMatch "^\.(env|git|htaccess|gitignore)$">
     Require all denied
 </FilesMatch>
+# Запрет доступа к дампам, логам, бэкапам, конфигам
 <FilesMatch "\.(sql|log|bak|ini)$">
     Require all denied
 </FilesMatch>
 
-# 2. ЧПУ — красивые ссылки
-# /car/5  →  /car.php?id=5
+# ЧПУ: /car/5 → car.php?id=5
 RewriteRule ^car/([0-9]+)/?$ car.php?id=$1 [L,QSA]
 
-# /admin/cars/5/edit  →  /admin/car-form.php?id=5 (пример)
-# (можно добавить по аналогии, если нужно)
+# Кастомные страницы ошибок
+ErrorDocument 403 /Volvo_Showroom/403.php
+ErrorDocument 404 /Volvo_Showroom/404.php
 
-# Если файла нет и это не папка — ничего не делаем
-RewriteCond %{REQUEST_FILENAME} !-f
-RewriteCond %{REQUEST_FILENAME} !-d
-
-# 3. СТРАНИЦЫ ОШИБОК
-ErrorDocument 403 /403.php
-ErrorDocument 404 /404.php
-
-# 4. КЕШИРОВАНИЕ СТАТИКИ
+# Кеширование статики в браузере
 <IfModule mod_expires.c>
     ExpiresActive On
-    ExpiresByType image/jpeg  "access plus 1 month"
-    ExpiresByType image/png   "access plus 1 month"
+    ExpiresByType image/jpeg "access plus 1 month"
+    ExpiresByType image/png "access plus 1 month"
     ExpiresByType image/svg+xml "access plus 1 month"
-    ExpiresByType image/webp  "access plus 1 month"
-    ExpiresByType text/css    "access plus 1 week"
+    ExpiresByType image/webp "access plus 1 month"
+    ExpiresByType text/css "access plus 1 week"
     ExpiresByType application/javascript "access plus 1 week"
-    ExpiresByType font/woff2  "access plus 1 month"
+    ExpiresByType font/woff2 "access plus 1 month"
 </IfModule>
 
-# 5. СЖАТИЕ ОТВЕТОВ
+# Gzip-сжатие ответов
 <IfModule mod_deflate.c>
     AddOutputFilterByType DEFLATE text/html text/plain text/css
     AddOutputFilterByType DEFLATE application/javascript application/json
     AddOutputFilterByType DEFLATE image/svg+xml
 </IfModule>
 
-# 6. БЕЗОПАСНЫЕ ЗАГОЛОВКИ
+# Заголовки безопасности
 <IfModule mod_headers.c>
     Header set X-Content-Type-Options "nosniff"
     Header set X-Frame-Options "SAMEORIGIN"
     Header set Referrer-Policy "strict-origin-when-cross-origin"
 </IfModule>
 
-# 7. ЗАПРЕТ ОПАСНЫХ HTTP-МЕТОДОВ
+# Разрешаем только GET, POST, HEAD — остальные методы отклоняем
 <LimitExcept GET POST HEAD>
     Require all denied
 </LimitExcept>
