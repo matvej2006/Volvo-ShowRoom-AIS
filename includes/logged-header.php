@@ -9,10 +9,6 @@
                 <li><a href="#services">Сервис</a></li>
                 <li><a href="#contact">Контакты</a></li>
             </ul>
-            <div class="nav-actions">
-                <button onclick="location.href='login.php'" class="btn btn-outline" style="padding: 10px 24px; font-size: 12px;">Войти</button>
-                <button onclick="location.href='register.php'" class="btn btn-primary" style="padding: 10px 24px; font-size: 12px;">Зарегистрироваться</button>
-            </div>
             <button class="mobile-toggle" id="mobileToggle" aria-label="Меню">
                 <span></span>
                 <span></span>
