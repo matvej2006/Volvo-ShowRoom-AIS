@@ -11,7 +11,12 @@
 <body>
 
     <?php
-    require "includes/header.php";
+    require "config/auth.php";
+    if (is_logged()) {
+        require "includes/logged-header.php";
+    } else {
+        require "includes/header.php";
+    }
     ?>
 
     <section class="hero">
