@@ -13,7 +13,7 @@
     <header class="error-logo" id="header">
         <div class="container">
             <nav class="nav">
-                <a href="index.php"><img src="/Volvo_Showroom/assets/images/volvo_new_logo-freelogovectors.net_.png" alt="" class="nav-logo"></a>
+                <a href="/Volvo_Showroom/index.php"><img src="/Volvo_Showroom/assets/images/volvo_new_logo-freelogovectors.net_.png" alt="" class="nav-logo"></a>
             </nav>
         </div>
     </header>
@@ -29,7 +29,7 @@
             <h1 class="error-title">Доступ <strong>запрещён</strong></h1>
             <p class="error-text">У вас нет прав для доступа к этой странице. Если вы считаете, что это ошибка, свяжитесь с администратором.</p>
             <div class="error-actions">
-                <button onclick="location.href='Volvo_Showroom/index.php'" class="btn btn-primary">На главную</button>
+                <button onclick="location.href='/Volvo_Showroom/index.php'" class="btn btn-primary">На главную</button>
                 <button onclick="history.back()" class="btn btn-outline">Назад</button>
             </div>
         </div>
