@@ -11,7 +11,8 @@ if (file_exists($envFile)) {
         [$key, $value] = explode('=', $line, 2);
         $key = trim($key);
         $value = trim($value);
-        if (!getenv($key)) {
+        // Пустое значение (например, пустой пароль БД) тоже считается заданным
+        if (getenv($key) === false) {
             putenv("{$key}={$value}");
             $_ENV[$key] = $value;
         }
@@ -32,16 +33,20 @@ function db(): PDO
         return $pdo;
     }
 
-    $host = getenv('DB_HOST') ?: DB_HOST;
-    $port = getenv('DB_PORT') ?: DB_PORT;
-    $dbname = getenv('DB_NAME') ?: DB_NAME;
-    $user = getenv('DB_USER') ?: DB_USER;
-    $password = getenv('DB_PASSWORD') ?: DB_PASSWORD;
+    $env = static function (string $key, string $default): string {
+        $value = getenv($key);
+        return $value === false ? $default : $value;
+    };
 
-    $dsn = sprintf('mysql:host=%s;port=%s;dbname=%s;charset=utf8mb4', $host, $port, $dbname);
+    $dsn = sprintf(
+        'mysql:host=%s;port=%s;dbname=%s;charset=utf8mb4',
+        $env('DB_HOST', DB_HOST),
+        $env('DB_PORT', (string)DB_PORT),
+        $env('DB_NAME', DB_NAME)
+    );
 
     try {
-        $pdo = new PDO($dsn, $user, $password, [
+        $pdo = new PDO($dsn, $env('DB_USER', DB_USER), $env('DB_PASSWORD', DB_PASSWORD), [
             PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION,
             PDO::ATTR_DEFAULT_FETCH_MODE => PDO::FETCH_ASSOC,
             PDO::ATTR_EMULATE_PREPARES => false,
