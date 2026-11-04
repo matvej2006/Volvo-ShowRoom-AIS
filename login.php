@@ -2,6 +2,52 @@
 
 declare(strict_types=1);
 
+require_once __DIR__ . '/config/auth.php';
+require_once __DIR__ . '/config/functions.php';
+require_once __DIR__ . '/config/db.php';
+
+if (is_logged()) {
+    redirect('index.php');
+}
+
+// Ошибки прошлой отправки, чтобы показать их после редиректа
+$errors = $_SESSION['_errors'] ?? [];
+unset($_SESSION['_errors']);
+
+if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+
+    $errors = [];
+
+    // 1. Проверка токена
+    csrf_check();
+
+    // 2. Получаем и очищаем данные
+    $email    = mb_strtolower(trim((string)($_POST['email'] ?? '')));
+    $password = (string)($_POST['password'] ?? '');
+
+    // 3. Валидация и проверка учётных данных
+    if ($email === '' || $password === '') {
+        $errors['general'] = 'Введите email и пароль';
+    } elseif (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
+        $errors['general'] = 'Некорректный email';
+    } elseif (!auth_login($email, $password)) {
+        // Не уточняем, что именно неверно — email или пароль
+        $errors['general'] = 'Неверный email или пароль';
+    }
+
+    // 4. Успешный вход
+    if (empty($errors)) {
+        log_action('user.login');
+        clear_old();
+        redirect('index.php');
+    }
+
+    // 5. Были ошибки — сохраняем ввод и возвращаемся на форму
+    keep_old($_POST);
+    $_SESSION['_errors'] = $errors;
+    redirect('login.php');
+}
+
 ?>
 <!DOCTYPE html>
 <html lang="ru">
@@ -176,12 +222,17 @@ declare(strict_types=1);
             <p class="auth-subtitle">Войдите в личный кабинет VolvoCarsBy</p>
 
 
-            <div class="auth-error"></div>
+            <?php if (!empty($errors)): ?>
+                <div class="auth-error">
+                    <?= e($errors['general'] ?? 'Не удалось выполнить вход') ?>
+                </div>
+            <?php endif; ?>
 
-            <form method="POST" action="">
+            <form method="POST" action="login.php">
+                <?= csrf_field() ?>
                 <div class="form-group">
                     <label for="email">Email</label>
-                    <input type="email" id="email" name="email" value="" placeholder="your@email.com" required>
+                    <input type="email" id="email" name="email" maxlength="150" value="<?= e(old('email')) ?>" placeholder="your@email.com" required>
                 </div>
                 <div class="form-group">
                     <label for="password">Пароль</label>
@@ -191,7 +242,7 @@ declare(strict_types=1);
             </form>
 
             <div class="auth-footer">
-                Нет аккаунта? <a href="/Volvo_Showroom/register.php">Зарегистрироваться</a>
+                Нет аккаунта? <a href="register.php">Зарегистрироваться</a>
             </div>
         </div>
     </div>
