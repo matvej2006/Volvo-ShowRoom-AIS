@@ -6,3 +6,5 @@
 .vscode/
 !.vscode/settings.json
 /vendor/
+/sql/
+!/sql/dump.sql
