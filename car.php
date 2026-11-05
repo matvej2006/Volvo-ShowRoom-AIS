@@ -52,7 +52,7 @@ if (!$car) {
 $stmt = db()->prepare('SELECT path FROM car_images WHERE car_id = ? ORDER BY sort_order, id');
 $stmt->execute([(int) $car['id']]);
 $images = array_values(array_filter(array_map(
-    static fn (array $row): string => car_image_url($row['path']),
+    static fn(array $row): string => car_image_url($row['path']),
     $stmt->fetchAll()
 )));
 
@@ -72,8 +72,8 @@ $stmt = db()->prepare(
 $stmt->execute([(int) $car['id'], (float) $car['price']]);
 $similar = $stmt->fetchAll();
 
-$fmtMoney  = static fn ($value): string => number_format((float) $value, 0, ',', ' ') . ' ₽';
-$fmtNumber = static fn ($value): string => number_format((float) $value, 0, ',', ' ');
+$fmtMoney  = static fn($value): string => number_format((float) $value, 0, ',', ' ') . ' ₽';
+$fmtNumber = static fn($value): string => number_format((float) $value, 0, ',', ' ');
 
 $price = $fmtMoney($car['price']);
 $title = 'Volvo ' . $car['model_name'];
@@ -106,7 +106,7 @@ $specRows = [
     'Комплектация'       => !empty($car['trim']) ? (string) $car['trim'] : '—',
     'VIN'                => (string) $car['vin'],
 ];
-$specRows = array_filter($specRows, static fn ($value): bool => $value !== null);
+$specRows = array_filter($specRows, static fn($value): bool => $value !== null);
 
 $options = array_values(array_filter(array_map(
     'trim',
@@ -214,8 +214,28 @@ $primaryCta = is_logged()
                     </div>
 
                     <div class="car-cta">
-                        <a href="<?= e($primaryCta) ?>" class="btn btn-dark">Записаться на тест-драйв</a>
-                        <a href="booking.php" class="btn btn-outline-dark">Забронировать</a>
+                        <?php if ($car['status'] === 'available'): ?>
+                            <a href="<?= e($primaryCta) ?>" class="btn btn-dark">
+                                Записаться на тест-драйв
+                            </a>
+                            <a href="booking.php?car=<?= (int) $car['id'] ?>" class="btn btn-outline-dark">
+                                Забронировать
+                            </a>
+                        <?php else: ?>
+                            <a href="#" class="btn btn-dark car-btn-inactive" aria-disabled="true" onclick="return false;">
+                                Записаться на тест-драйв
+                            </a>
+                            <a href="#" class="btn btn-outline-dark car-btn-inactive" aria-disabled="true" onclick="return false;">
+                                Забронировать
+                            </a>
+                            <?php if ($car['status'] === 'sold'): ?>
+                                <p class="car-unavailable-note">Этот автомобиль уже продан.</p>
+                            <?php elseif ($car['status'] === 'reserved'): ?>
+                                <p class="car-unavailable-note">Автомобиль забронирован.</p>
+                            <?php elseif ($car['status'] === 'service'): ?>
+                                <p class="car-unavailable-note">Автомобиль на предпродажной подготовке.</p>
+                            <?php endif; ?>
+                        <?php endif; ?>
                     </div>
 
                     <p class="car-note">VIN: <?= e($car['vin']) ?></p>
