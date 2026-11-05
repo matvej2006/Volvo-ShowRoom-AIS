@@ -215,7 +215,7 @@ $primaryCta = is_logged()
 
                     <div class="car-cta">
                         <a href="<?= e($primaryCta) ?>" class="btn btn-dark">Записаться на тест-драйв</a>
-                        <a href="catalog.php" class="btn btn-outline-dark">Все автомобили</a>
+                        <a href="booking.php" class="btn btn-outline-dark">Забронировать</a>
                     </div>
 
                     <p class="car-note">VIN: <?= e($car['vin']) ?></p>
@@ -279,18 +279,8 @@ $primaryCta = is_logged()
 
     <?php require __DIR__ . '/includes/footer.php'; ?>
 
+    <script src="assets/js/main.js"></script>
     <script>
-        const header = document.getElementById('header');
-        window.addEventListener('scroll', () => {
-            header.classList.toggle('scrolled', window.scrollY > 50);
-        });
-
-        const mobileToggle = document.getElementById('mobileToggle');
-        const navMenu = document.getElementById('navMenu');
-        mobileToggle.addEventListener('click', () => {
-            navMenu.classList.toggle('active');
-        });
-
         const mainImage = document.getElementById('carMainImage');
         document.querySelectorAll('.car-thumb').forEach(thumb => {
             thumb.addEventListener('click', () => {

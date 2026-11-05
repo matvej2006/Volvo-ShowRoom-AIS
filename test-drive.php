@@ -292,18 +292,8 @@ $flashSuccess = flash('success');
 
     <?php require __DIR__ . '/includes/footer.php'; ?>
 
+    <script src="assets/js/main.js"></script>
     <script>
-        const header = document.getElementById('header');
-        window.addEventListener('scroll', () => {
-            header.classList.toggle('scrolled', window.scrollY > 50);
-        });
-
-        const mobileToggle = document.getElementById('mobileToggle');
-        const navMenu = document.getElementById('navMenu');
-        mobileToggle.addEventListener('click', () => {
-            navMenu.classList.toggle('active');
-        });
-
         const carSelect = document.getElementById('car_id');
         if (carSelect) {
             const preview = document.getElementById('tdPreview');

@@ -764,18 +764,7 @@ $flashError   = flash('error');
 
     <?php require 'includes/footer.php'; ?>
 
-    <script>
-        const header = document.getElementById('header');
-        window.addEventListener('scroll', () => {
-            header.classList.toggle('scrolled', window.scrollY > 50);
-        });
-
-        const mobileToggle = document.getElementById('mobileToggle');
-        const navMenu = document.getElementById('navMenu');
-        mobileToggle.addEventListener('click', () => {
-            navMenu.classList.toggle('active');
-        });
-    </script>
+    <script src="assets/js/main.js"></script>
 
 </body>
 

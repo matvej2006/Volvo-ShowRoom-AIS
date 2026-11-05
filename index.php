@@ -6,6 +6,7 @@
     <meta name="viewport" content="">
     <title>VolvoCarsBy — Официальный дилер</title>
     <link rel="stylesheet" href="assets/css/style.css">
+    <script src="assets/js/main.js"></script>
 </head>
 
 <body>
@@ -256,29 +257,6 @@
     <?php
     require "includes/footer.php";
     ?>
-
-    <script>
-        const header = document.getElementById('header');
-        window.addEventListener('scroll', () => {
-            if (window.scrollY > 50) {
-                header.classList.add('scrolled');
-            } else {
-                header.classList.remove('scrolled');
-            }
-        });
-
-        const mobileToggle = document.getElementById('mobileToggle');
-        const navMenu = document.getElementById('navMenu');
-        mobileToggle.addEventListener('click', () => {
-            navMenu.classList.toggle('active');
-        });
-
-        document.querySelectorAll('.nav-menu a').forEach(link => {
-            link.addEventListener('click', () => {
-                navMenu.classList.remove('active');
-            });
-        });
-    </script>
 
 </body>
 
