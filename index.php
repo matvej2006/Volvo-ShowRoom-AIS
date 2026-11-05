@@ -130,7 +130,6 @@
                             <p class="model-price">от <span><?= e($fmtMoney($m['min_price'])) ?></span></p>
                             <div class="model-actions">
                                 <button onclick="location.href='car.php?model=<?= urlencode($m['model_name']) ?>'" class="btn btn-dark">Подробнее</button>
-                                <button onclick="location.href='#'" class="btn btn-outline-dark">Конфигуратор</button>
                             </div>
                         </div>
                     </div>
