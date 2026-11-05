@@ -13,8 +13,9 @@
             <div class="footer-col">
                 <h4>Покупателям</h4>
                 <ul>
+                    <li><a href="catalog.php">Все автомобили</a></li>
                     <li><a href="#">Конфигуратор</a></li>
-                    <li><a href="#">Тест-драйв</a></li>
+                    <li><a href="test-drive.php">Тест-драйв</a></li>
                     <li><a href="#">Trade-In</a></li>
                     <li><a href="#">Кредитование</a></li>
                     <li><a href="#">Лизинг</a></li>
