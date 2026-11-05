@@ -7,12 +7,15 @@ require_once __DIR__ . '/config/functions.php';
 require_once __DIR__ . '/config/db.php';
 
 if (is_logged()) {
-    redirect('index.php');
+    redirect('profile.php');
 }
 
 // Ошибки прошлой отправки, чтобы показать их после редиректа
 $errors = $_SESSION['_errors'] ?? [];
 unset($_SESSION['_errors']);
+
+// Например, «Требуется вход» после попытки открыть профиль
+$flashError = flash('error');
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
@@ -39,7 +42,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     if (empty($errors)) {
         log_action('user.login');
         clear_old();
-        redirect('index.php');
+        redirect('profile.php');
     }
 
     // 5. Были ошибки — сохраняем ввод и возвращаемся на форму
@@ -216,11 +219,17 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     <div class="auth-page">
         <div class="auth-glass">
             <div class="auth-logo">
-                <a href="index.php"><img onclick="location.href='index.php'" src="assets/images/volvo_new_logo-freelogovectors.net_.png" alt="Volvo"></a>
+                <a href="index.php"><img src="assets/images/volvo_new_logo-freelogovectors.net_.png" alt="Volvo"></a>
             </div>
             <h1 class="auth-title"><strong>Добро пожаловать</strong></h1>
             <p class="auth-subtitle">Войдите в личный кабинет VolvoCarsBy</p>
 
+
+            <?php if ($flashError !== null): ?>
+                <div class="auth-error">
+                    <?= e($flashError) ?>
+                </div>
+            <?php endif; ?>
 
             <?php if (!empty($errors)): ?>
                 <div class="auth-error">

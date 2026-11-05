@@ -58,7 +58,7 @@ function require_login(): void
 {
     if (!is_logged()) {
         flash('error', 'Требуется вход');
-        redirect('/login.php');
+        redirect('login.php');
     }
 }
 
@@ -66,7 +66,7 @@ function require_role(string ...$roles): void
 {
     require_login();
     if (!in_array(current_user()['role'], $roles, true)) {
-        redirect('/403.php');
+        redirect('403.php');
     }
 }
 

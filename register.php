@@ -10,20 +10,19 @@ if (is_logged()) {
     redirect("profile.php");
 }
 
-// Ошибки прошлой отправки (см. пункт 6), чтобы показать их после редиректа
-$errors = $_SESSION['_errors'] ?? [];
+$errors = [];
+$sessionErrors = $_SESSION['_errors'] ?? [];
 unset($_SESSION['_errors']);
+$errors = $sessionErrors;
 
-if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-
-    $errors = [];
+if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
     // 1. Проверка токена
     csrf_check();
 
     // 2. Получаем и очищаем данные
     $name     = trim((string)($_POST['name'] ?? ''));
-    $email    = mb_strtolower(trim((string)($_POST['email'] ?? '')));
+    $email    = trim((string)($_POST['email'] ?? ''));
     $phone    = trim((string)($_POST['phone'] ?? ''));
     $password = (string)($_POST['password'] ?? '');
     $confirm  = (string)($_POST['password_confirm'] ?? '');
@@ -84,7 +83,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             // Автоматически логиним нового клиента
             auth_login($email, $password);
 
-            // Журнал пишем после входа, иначе user_id в логе останется пустым
+            // Записываем в журнал действий (хотя клиент не сотрудник — история полезна).
+            // Пишем после auth_login(), иначе user_id ещё не известен.
             log_action('user.register', 'users', $userId);
 
             flash('success', 'Регистрация успешна. Добро пожаловать!');
@@ -104,7 +104,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     // 6. Если были ошибки — сохраняем ввод и возвращаемся на форму
     if (!empty($errors)) {
         keep_old($_POST);
-        // Сохраняем ошибки в сессию, чтобы показать их после редиректа
+        // Сохраняем ошибки в flash, чтобы показать после редиректа
         $_SESSION['_errors'] = $errors;
         redirect('register.php');
     }
@@ -247,19 +247,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             box-shadow: 0 0 0 3px rgba(255, 255, 255, 0.04);
         }
 
-        .form-group input.is-invalid {
-            border-color: rgba(255, 59, 48, 0.45);
-            background: rgba(255, 59, 48, 0.06);
-        }
-
-        .field-error {
-            display: block;
-            margin-top: 6px;
-            font-size: 12px;
-            line-height: 1.4;
-            color: #ff8a8a;
-        }
-
         .auth-submit {
             width: 100%;
             margin-top: 8px;
@@ -308,7 +295,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
             <?php if (!empty($errors)): ?>
                 <div class="auth-error">
-                    <?= e($errors['general'] ?? 'Проверьте правильность заполнения формы') ?>
+                    <?php foreach ($errors as $msg): ?>
+                        <div><?= e((string)$msg) ?></div>
+                    <?php endforeach; ?>
                 </div>
             <?php endif; ?>
 
@@ -317,40 +306,25 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 <div class="form-row">
                     <div class="form-group">
                         <label for="name">Имя</label>
-                        <input type="text" id="name" name="name" maxlength="100" value="<?= e(old('name')) ?>" placeholder="Ваше имя" <?= isset($errors['name']) ? 'class="is-invalid"' : '' ?> required>
-                        <?php if (isset($errors['name'])): ?>
-                            <span class="field-error"><?= e($errors['name']) ?></span>
-                        <?php endif; ?>
+                        <input type="text" id="name" name="name" value="<?= e(old('name')) ?>" placeholder="Ваше имя" required>
                     </div>
                     <div class="form-group">
                         <label for="phone">Телефон</label>
-                        <input type="tel" id="phone" name="phone" maxlength="30" value="<?= e(old('phone')) ?>" placeholder="+375 (__) ___-__-__" <?= isset($errors['phone']) ? 'class="is-invalid"' : '' ?>>
-                        <?php if (isset($errors['phone'])): ?>
-                            <span class="field-error"><?= e($errors['phone']) ?></span>
-                        <?php endif; ?>
+                        <input type="tel" id="phone" name="phone" value="<?= e(old('phone')) ?>" placeholder="+375 (__) ___-__-__">
                     </div>
                 </div>
                 <div class="form-group">
                     <label for="email">Email</label>
-                    <input type="email" id="email" name="email" maxlength="150" value="<?= e(old('email')) ?>" placeholder="your@email.com" <?= isset($errors['email']) ? 'class="is-invalid"' : '' ?> required>
-                    <?php if (isset($errors['email'])): ?>
-                        <span class="field-error"><?= e($errors['email']) ?></span>
-                    <?php endif; ?>
+                    <input type="email" id="email" name="email" value="<?= e(old('email')) ?>" placeholder="your@email.com" required>
                 </div>
                 <div class="form-row">
                     <div class="form-group">
                         <label for="password">Пароль</label>
-                        <input type="password" id="password" name="password" placeholder="Минимум 6 символов" <?= isset($errors['password']) ? 'class="is-invalid"' : '' ?> required>
-                        <?php if (isset($errors['password'])): ?>
-                            <span class="field-error"><?= e($errors['password']) ?></span>
-                        <?php endif; ?>
+                        <input type="password" id="password" name="password" placeholder="Минимум 6 символов" required>
                     </div>
                     <div class="form-group">
                         <label for="password_confirm">Подтверждение</label>
-                        <input type="password" id="password_confirm" name="password_confirm" placeholder="Повторите пароль" <?= isset($errors['password_confirm']) ? 'class="is-invalid"' : '' ?> required>
-                        <?php if (isset($errors['password_confirm'])): ?>
-                            <span class="field-error"><?= e($errors['password_confirm']) ?></span>
-                        <?php endif; ?>
+                        <input type="password" id="password_confirm" name="password_confirm" placeholder="Повторите пароль" required>
                     </div>
                 </div>
                 <button type="submit" class="btn btn-primary auth-submit">Зарегистрироваться</button>

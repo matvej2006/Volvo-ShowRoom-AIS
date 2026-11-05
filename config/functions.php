@@ -58,7 +58,8 @@ function csrf_check(): void
     }
     $token = $_POST['_csrf'] ?? '';
     if (!is_string($token) || $token === '' || !hash_equals($_SESSION['_csrf'] ?? '', $token)) {
-        http_response_code(419);
+        // 403, а не 419: Apache (mod_php) отдаёт нестандартный код как 500
+        http_response_code(403);
         exit('CSRF-токен недействителен');
     }
 }
