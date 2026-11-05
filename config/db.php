@@ -21,7 +21,7 @@ if (file_exists($envFile)) {
 
 const DB_HOST = 'localhost';
 const DB_PORT = 3306;
-const DB_NAME = 'volvo_showroom';
+const DB_NAME = 'volvo_dealership';
 const DB_USER = 'root';
 const DB_PASSWORD = 'root';
 
