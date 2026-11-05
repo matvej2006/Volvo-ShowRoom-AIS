@@ -1,3 +1,7 @@
+/* =========================================================
+   Main page (index.php)
+   ========================================================= */
+
 *,
 *::before,
 *::after {
@@ -73,7 +77,7 @@ img {
   width: calc(100% - 32px);
   max-width: 1200px;
   z-index: 1000;
-  background: rgba(30, 30, 30, 0.45);
+  background: rgba(30, 30, 30, 0.65);
   backdrop-filter: var(--glass-blur);
   -webkit-backdrop-filter: var(--glass-blur);
   border: 1px solid rgba(255, 255, 255, 0.15);
@@ -430,7 +434,7 @@ img {
 
 .models-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+  grid-template-columns: repeat(auto-fit, minmax(550px, 1fr));
   gap: 24px;
 }
 
@@ -1094,4 +1098,1196 @@ img {
     margin: 0 16px;
     border-radius: 24px;
   }
+}
+
+/* =========================================================
+   Car page (car.php)
+   ========================================================= */
+
+.car-page {
+  padding: 118px 0 90px;
+  background: #f0f0f0;
+  min-height: 100vh;
+}
+
+.breadcrumbs {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 8px;
+  font-size: 12px;
+  color: #8a8a8a;
+  margin-bottom: 26px;
+}
+
+.breadcrumbs a {
+  color: #8a8a8a;
+}
+
+.breadcrumbs a:hover {
+  color: var(--volvo-black);
+}
+
+.breadcrumbs .sep {
+  opacity: 0.45;
+}
+
+.car-main {
+  display: grid;
+  grid-template-columns: minmax(0, 1.35fr) minmax(0, 1fr);
+  gap: 32px;
+  align-items: start;
+}
+
+.car-gallery-main {
+  border-radius: 24px;
+  overflow: hidden;
+  background: #111;
+  box-shadow: 0 24px 60px rgba(0, 0, 0, 0.14);
+}
+
+.car-gallery-main img {
+  width: 100%;
+  height: 460px;
+  object-fit: cover;
+  display: block;
+}
+
+.car-gallery-thumbs {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 12px;
+  margin-top: 12px;
+}
+
+.car-thumb {
+  padding: 0;
+  border: 2px solid transparent;
+  border-radius: 14px;
+  overflow: hidden;
+  background: #111;
+  cursor: pointer;
+  opacity: 0.6;
+  transition: var(--transition);
+}
+
+.car-thumb img {
+  width: 100%;
+  height: 82px;
+  object-fit: cover;
+  display: block;
+}
+
+.car-thumb:hover,
+.car-thumb.active {
+  opacity: 1;
+  border-color: var(--volvo-black);
+}
+
+.car-summary {
+  position: sticky;
+  top: 110px;
+  padding: 32px;
+  background: rgba(255, 255, 255, 0.72);
+  backdrop-filter: var(--glass-blur);
+  -webkit-backdrop-filter: var(--glass-blur);
+  border: 1px solid rgba(255, 255, 255, 0.9);
+  border-radius: 24px;
+  box-shadow:
+    0 8px 40px rgba(0, 0, 0, 0.08),
+    inset 0 1px 0 rgba(255, 255, 255, 0.95);
+}
+
+.car-badge {
+  display: inline-block;
+  padding: 6px 14px;
+  margin-bottom: 16px;
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  border-radius: 980px;
+  border: 1px solid transparent;
+}
+
+.car-badge-available {
+  background: rgba(52, 211, 153, 0.14);
+  color: #12795a;
+  border-color: rgba(52, 211, 153, 0.25);
+}
+
+.car-badge-reserved {
+  background: rgba(251, 191, 36, 0.16);
+  color: #92660a;
+  border-color: rgba(251, 191, 36, 0.3);
+}
+
+.car-badge-sold {
+  background: rgba(0, 0, 0, 0.06);
+  color: #6b6b6b;
+  border-color: rgba(0, 0, 0, 0.08);
+}
+
+.car-badge-service {
+  background: rgba(96, 165, 250, 0.14);
+  color: #2c5f9e;
+  border-color: rgba(96, 165, 250, 0.25);
+}
+
+.car-model-label {
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  color: #8a8a8a;
+  margin-bottom: 6px;
+}
+
+.car-title {
+  font-size: clamp(30px, 3.4vw, 42px);
+  font-weight: 300;
+  line-height: 1.15;
+  letter-spacing: -0.5px;
+  color: var(--volvo-black);
+  margin-bottom: 8px;
+}
+
+.car-title strong {
+  font-weight: 700;
+}
+
+.car-sub {
+  font-size: 13px;
+  color: #666666;
+}
+
+.car-dot {
+  margin: 0 4px;
+  opacity: 0.5;
+}
+
+.car-price {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  margin: 22px 0 24px;
+  padding: 18px 0;
+  border-top: 1px solid rgba(0, 0, 0, 0.07);
+  border-bottom: 1px solid rgba(0, 0, 0, 0.07);
+}
+
+.car-price-label {
+  font-size: 11px;
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+  color: #8a8a8a;
+}
+
+.car-price-value {
+  font-size: 32px;
+  font-weight: 700;
+  letter-spacing: -0.5px;
+  color: var(--volvo-black);
+}
+
+.car-quick-specs {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 14px;
+  margin-bottom: 26px;
+}
+
+.car-quick-specs .spec-value {
+  font-size: 15px;
+}
+
+.car-quick-specs .spec-label {
+  font-size: 10px;
+}
+
+.car-cta {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.car-cta .btn {
+  width: 100%;
+}
+
+.car-note {
+  margin-top: 16px;
+  font-size: 11px;
+  letter-spacing: 0.5px;
+  color: #9a9a9a;
+  word-break: break-word;
+}
+
+.car-block {
+  padding: 32px;
+  background: rgba(255, 255, 255, 0.62);
+  backdrop-filter: var(--glass-blur);
+  -webkit-backdrop-filter: var(--glass-blur);
+  border: 1px solid rgba(255, 255, 255, 0.88);
+  border-radius: 22px;
+  box-shadow: 0 4px 24px rgba(0, 0, 0, 0.05);
+}
+
+.car-block h2 {
+  font-size: 18px;
+  font-weight: 600;
+  letter-spacing: -0.2px;
+  color: var(--volvo-black);
+  margin-bottom: 18px;
+}
+
+.car-block p {
+  font-size: 15px;
+  line-height: 1.8;
+  color: #555555;
+}
+
+.car-description {
+  margin-top: 32px;
+}
+
+.car-detail-grid {
+  display: grid;
+  grid-template-columns: minmax(0, 1.1fr) minmax(0, 0.9fr);
+  gap: 24px;
+  margin-top: 24px;
+  align-items: start;
+}
+
+.spec-list {
+  margin: 0;
+}
+
+.spec-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  gap: 16px;
+  padding: 11px 0;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.06);
+  font-size: 14px;
+}
+
+.spec-row:last-child {
+  border-bottom: none;
+}
+
+.spec-row dt {
+  color: #8a8a8a;
+}
+
+.spec-row dd {
+  margin: 0;
+  font-weight: 500;
+  color: var(--volvo-black);
+  text-align: right;
+}
+
+.option-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.option-list li {
+  padding: 7px 14px;
+  font-size: 12.5px;
+  color: #333333;
+  background: rgba(0, 0, 0, 0.04);
+  border: 1px solid rgba(0, 0, 0, 0.06);
+  border-radius: 980px;
+}
+
+.car-similar {
+  margin-top: 72px;
+}
+
+.car-similar-head {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 16px;
+  margin-bottom: 24px;
+}
+
+.car-similar-head h2 {
+  font-size: 22px;
+  font-weight: 600;
+  letter-spacing: -0.3px;
+  color: var(--volvo-black);
+}
+
+.car-similar-link {
+  font-size: 13px;
+  font-weight: 500;
+  color: #666666;
+}
+
+.car-similar-link:hover {
+  color: var(--volvo-black);
+}
+
+.car-similar-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: 20px;
+}
+
+.car-mini {
+  display: block;
+  overflow: hidden;
+  border-radius: 20px;
+  background: rgba(255, 255, 255, 0.65);
+  border: 1px solid rgba(255, 255, 255, 0.9);
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05);
+  transition: var(--transition);
+}
+
+.car-mini:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 18px 40px rgba(0, 0, 0, 0.1);
+}
+
+.car-mini img {
+  width: 100%;
+  height: 170px;
+  object-fit: cover;
+}
+
+.car-mini-body {
+  display: flex;
+  flex-direction: column;
+  padding: 18px 20px 22px;
+}
+
+.car-mini-name {
+  font-size: 17px;
+  font-weight: 600;
+  color: var(--volvo-black);
+}
+
+.car-mini-meta {
+  font-size: 12px;
+  color: #8a8a8a;
+  margin: 2px 0 12px;
+}
+
+.car-mini-price {
+  font-size: 16px;
+  font-weight: 700;
+  color: var(--volvo-black);
+}
+
+@media (max-width: 1024px) {
+  .car-main {
+    grid-template-columns: 1fr;
+  }
+
+  .car-summary {
+    position: static;
+  }
+
+  .car-gallery-main img {
+    height: 380px;
+  }
+
+  .car-detail-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 768px) {
+  .car-page {
+    padding: 100px 0 60px;
+  }
+
+  .car-gallery-main {
+    border-radius: 18px;
+  }
+
+  .car-gallery-main img {
+    height: 240px;
+  }
+
+  .car-gallery-thumbs {
+    grid-template-columns: repeat(3, 1fr);
+  }
+
+  .car-thumb img {
+    height: 66px;
+  }
+
+  .car-summary,
+  .car-block {
+    padding: 22px;
+    border-radius: 18px;
+  }
+
+  .car-price-value {
+    font-size: 26px;
+  }
+
+  .car-similar {
+    margin-top: 48px;
+  }
+
+  .car-similar-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* =========================================================
+   Contacts + test drive pages
+   ========================================================= */
+
+.page-hero {
+  padding: 118px 0 90px;
+  background: #f0f0f0;
+  min-height: 100vh;
+}
+
+.page-hero-head {
+  margin-bottom: 44px;
+}
+
+.contacts-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  gap: 20px;
+}
+
+.contact-card {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+  padding: 28px;
+  background: rgba(255, 255, 255, 0.62);
+  backdrop-filter: var(--glass-blur);
+  -webkit-backdrop-filter: var(--glass-blur);
+  border: 1px solid rgba(255, 255, 255, 0.88);
+  border-radius: 20px;
+  box-shadow: 0 4px 24px rgba(0, 0, 0, 0.05);
+}
+
+.contact-icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 44px;
+  height: 44px;
+  margin-bottom: 14px;
+  border-radius: 14px;
+  background: rgba(0, 0, 0, 0.05);
+  color: var(--volvo-black);
+}
+
+.contact-icon svg {
+  width: 20px;
+  height: 20px;
+}
+
+.contact-label {
+  font-size: 10.5px;
+  font-weight: 600;
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+  color: #8a8a8a;
+}
+
+.contact-value {
+  font-size: 16px;
+  font-weight: 600;
+  color: var(--volvo-black);
+  word-break: break-word;
+}
+
+a.contact-value:hover {
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+
+.contact-hint {
+  margin-top: 4px;
+  font-size: 12.5px;
+  line-height: 1.6;
+  color: #777777;
+}
+
+.contacts-map {
+  display: grid;
+  grid-template-columns: minmax(0, 0.85fr) minmax(0, 1.15fr);
+  gap: 24px;
+  margin-top: 24px;
+  align-items: stretch;
+}
+
+.contacts-map-info {
+  display: flex;
+  flex-direction: column;
+  padding: 32px;
+  background: rgba(255, 255, 255, 0.62);
+  backdrop-filter: var(--glass-blur);
+  -webkit-backdrop-filter: var(--glass-blur);
+  border: 1px solid rgba(255, 255, 255, 0.88);
+  border-radius: 24px;
+  box-shadow: 0 4px 24px rgba(0, 0, 0, 0.05);
+}
+
+.contacts-map-info h2 {
+  font-size: 20px;
+  font-weight: 600;
+  letter-spacing: -0.2px;
+  color: var(--volvo-black);
+  margin-bottom: 16px;
+}
+
+.contacts-steps {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.contacts-steps li {
+  position: relative;
+  padding-left: 20px;
+  font-size: 13.5px;
+  line-height: 1.65;
+  color: #555555;
+}
+
+.contacts-steps li::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 8px;
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: var(--volvo-black);
+  opacity: 0.45;
+}
+
+.contacts-map-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-top: auto;
+  padding-top: 26px;
+}
+
+.contacts-map-actions .btn {
+  padding: 11px 20px;
+  font-size: 12px;
+}
+
+.map-frame {
+  min-height: 380px;
+  overflow: hidden;
+  background: #e6e6e6;
+  border: 1px solid rgba(255, 255, 255, 0.9);
+  border-radius: 24px;
+  box-shadow: 0 4px 24px rgba(0, 0, 0, 0.06);
+}
+
+.map-frame iframe {
+  display: block;
+  width: 100%;
+  height: 100%;
+  min-height: 380px;
+  border: 0;
+}
+
+.contacts-cta {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 24px;
+  margin-top: 24px;
+  padding: 32px 36px;
+  border-radius: 24px;
+  background: linear-gradient(120deg, #121212 0%, #1d1d1f 100%);
+  color: var(--volvo-white);
+}
+
+.contacts-cta h2 {
+  font-size: 22px;
+  font-weight: 600;
+  letter-spacing: -0.3px;
+  margin-bottom: 6px;
+}
+
+.contacts-cta p {
+  font-size: 13.5px;
+  color: rgba(255, 255, 255, 0.6);
+  max-width: 560px;
+}
+
+.contacts-cta-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+.contacts-cta .btn {
+  padding: 12px 24px;
+  font-size: 13px;
+}
+
+/* ---------- Test drive ---------- */
+
+.td-grid {
+  display: grid;
+  grid-template-columns: minmax(0, 1.15fr) minmax(0, 0.85fr);
+  gap: 24px;
+  align-items: start;
+}
+
+.td-card {
+  padding: 32px;
+  background: rgba(255, 255, 255, 0.68);
+  backdrop-filter: var(--glass-blur);
+  -webkit-backdrop-filter: var(--glass-blur);
+  border: 1px solid rgba(255, 255, 255, 0.9);
+  border-radius: 24px;
+  box-shadow: 0 4px 24px rgba(0, 0, 0, 0.05);
+}
+
+.td-side {
+  display: flex;
+  flex-direction: column;
+}
+
+.td-alert {
+  margin-bottom: 20px;
+  padding: 14px 20px;
+  font-size: 13.5px;
+  text-align: center;
+  border-radius: 14px;
+  border: 1px solid transparent;
+}
+
+.td-alert-success {
+  background: rgba(52, 211, 153, 0.12);
+  color: #12795a;
+  border-color: rgba(52, 211, 153, 0.25);
+}
+
+.td-alert-error {
+  background: rgba(248, 113, 113, 0.1);
+  color: #a12626;
+  border-color: rgba(248, 113, 113, 0.22);
+}
+
+.field {
+  margin-bottom: 20px;
+}
+
+.field label {
+  display: block;
+  margin-bottom: 8px;
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  color: #8a8a8a;
+}
+
+.field input,
+.field select,
+.field textarea {
+  width: 100%;
+  padding: 13px 16px;
+  font-family: var(--font-primary);
+  font-size: 15px;
+  color: var(--volvo-black);
+  background: #ffffff;
+  border: 1px solid rgba(0, 0, 0, 0.12);
+  border-radius: 14px;
+  outline: none;
+  transition: border-color 0.25s ease, box-shadow 0.25s ease;
+}
+
+.field select {
+  cursor: pointer;
+}
+
+.field textarea {
+  min-height: 110px;
+  line-height: 1.6;
+  resize: vertical;
+}
+
+.field input:focus,
+.field select:focus,
+.field textarea:focus {
+  border-color: var(--volvo-black);
+  box-shadow: 0 0 0 3px rgba(0, 0, 0, 0.05);
+}
+
+.field-error {
+  display: block;
+  margin-top: 6px;
+  font-size: 12px;
+  color: #c0392b;
+}
+
+.field-hint {
+  display: block;
+  margin-top: 6px;
+  font-size: 12px;
+  color: #9a9a9a;
+}
+
+.td-submit {
+  width: 100%;
+  margin-top: 4px;
+}
+
+.td-note {
+  margin-top: 14px;
+  font-size: 11.5px;
+  line-height: 1.6;
+  color: #9a9a9a;
+}
+
+.td-preview {
+  overflow: hidden;
+  margin-bottom: 20px;
+  background: rgba(255, 255, 255, 0.72);
+  border: 1px solid rgba(255, 255, 255, 0.9);
+  border-radius: 22px;
+  box-shadow: 0 4px 24px rgba(0, 0, 0, 0.06);
+}
+
+.td-preview img {
+  width: 100%;
+  height: 190px;
+  object-fit: cover;
+}
+
+.td-preview-body {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  padding: 20px 24px 24px;
+}
+
+.td-preview-label {
+  font-size: 10px;
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+  color: #8a8a8a;
+}
+
+.td-preview-name {
+  font-size: 18px;
+  font-weight: 600;
+  color: var(--volvo-black);
+}
+
+.td-preview-meta {
+  font-size: 13px;
+  color: #666666;
+}
+
+.td-preview-link {
+  margin-top: 8px;
+  font-size: 12.5px;
+  font-weight: 600;
+  color: var(--volvo-black);
+}
+
+.td-preview-link:hover {
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+
+.td-preview-empty {
+  margin-bottom: 20px;
+  padding: 26px 20px;
+  font-size: 13px;
+  text-align: center;
+  color: #8a8a8a;
+  background: rgba(255, 255, 255, 0.4);
+  border: 1px dashed rgba(0, 0, 0, 0.15);
+  border-radius: 22px;
+}
+
+.td-steps h2 {
+  font-size: 17px;
+  font-weight: 600;
+  color: var(--volvo-black);
+  margin-bottom: 18px;
+}
+
+.td-steps ol {
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+}
+
+.td-steps li {
+  display: flex;
+  gap: 14px;
+}
+
+.step-num {
+  flex: none;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 28px;
+  height: 28px;
+  font-size: 12px;
+  font-weight: 600;
+  color: var(--volvo-white);
+  background: var(--volvo-black);
+  border-radius: 50%;
+}
+
+.td-steps strong {
+  display: block;
+  margin-bottom: 2px;
+  font-size: 13.5px;
+  color: var(--volvo-black);
+}
+
+.td-steps p {
+  font-size: 12.5px;
+  line-height: 1.6;
+  color: #666666;
+}
+
+.td-contacts-link {
+  display: inline-block;
+  margin-top: 20px;
+  font-size: 12.5px;
+  font-weight: 600;
+  color: var(--volvo-black);
+}
+
+.td-contacts-link:hover {
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+
+.td-empty {
+  padding: 16px 0;
+  text-align: center;
+}
+
+.td-empty h2 {
+  margin-bottom: 10px;
+  font-size: 20px;
+}
+
+.td-empty p {
+  margin-bottom: 20px;
+  font-size: 13.5px;
+  line-height: 1.7;
+  color: #666666;
+}
+
+@media (max-width: 1024px) {
+  .contacts-map,
+  .td-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .map-frame {
+    min-height: 320px;
+  }
+
+  .map-frame iframe {
+    min-height: 320px;
+  }
+}
+
+@media (max-width: 768px) {
+  .page-hero {
+    padding: 100px 0 60px;
+  }
+
+  .page-hero-head {
+    margin-bottom: 32px;
+  }
+
+  .contact-card,
+  .contacts-map-info,
+  .td-card {
+    padding: 22px;
+    border-radius: 18px;
+  }
+
+  .contacts-cta {
+    padding: 26px 22px;
+    border-radius: 20px;
+  }
+
+  .contacts-cta-actions {
+    width: 100%;
+  }
+
+  .contacts-cta-actions .btn {
+    flex: 1;
+  }
+}
+
+/* =========================================================
+   Catalog (catalog.php)
+   ========================================================= */
+
+.catalog-count {
+  display: inline-block;
+  margin-top: 16px;
+  font-size: 11.5px;
+  font-weight: 600;
+  letter-spacing: 1.2px;
+  text-transform: uppercase;
+  color: #8a8a8a;
+}
+
+.catalog-list {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.catalog-card {
+  display: grid;
+  grid-template-columns: 380px minmax(0, 1fr);
+  overflow: hidden;
+  background: rgba(255, 255, 255, 0.65);
+  backdrop-filter: var(--glass-blur);
+  -webkit-backdrop-filter: var(--glass-blur);
+  border: 1px solid rgba(255, 255, 255, 0.9);
+  border-radius: 24px;
+  box-shadow: 0 4px 24px rgba(0, 0, 0, 0.06);
+  transition: var(--transition);
+}
+
+.catalog-card:hover {
+  transform: translateY(-3px);
+  border-color: rgba(255, 255, 255, 1);
+  box-shadow: 0 18px 44px rgba(0, 0, 0, 0.12);
+}
+
+.catalog-card:focus-visible {
+  outline: 2px solid var(--volvo-black);
+  outline-offset: 3px;
+}
+
+.catalog-photo {
+  position: relative;
+  overflow: hidden;
+  background: #111111;
+  min-height: 280px;
+}
+
+.catalog-photo img {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: var(--transition);
+}
+
+.catalog-card:hover .catalog-photo img {
+  transform: scale(1.04);
+}
+
+.catalog-body {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  padding: 28px 32px;
+}
+
+.catalog-head {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 20px;
+}
+
+.catalog-heading {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.catalog-heading .car-badge {
+  align-self: flex-start;
+  margin-bottom: 0;
+}
+
+.catalog-title {
+  font-size: 24px;
+  font-weight: 300;
+  letter-spacing: -0.4px;
+  color: var(--volvo-black);
+}
+
+.catalog-title strong {
+  font-weight: 700;
+}
+
+.catalog-price {
+  font-size: 22px;
+  font-weight: 700;
+  letter-spacing: -0.3px;
+  color: var(--volvo-black);
+  white-space: nowrap;
+}
+
+.catalog-subtitle {
+  font-size: 13px;
+  color: #666666;
+}
+
+.catalog-specs {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 16px;
+  padding: 16px 0;
+  border-top: 1px solid rgba(0, 0, 0, 0.06);
+  border-bottom: 1px solid rgba(0, 0, 0, 0.06);
+}
+
+.catalog-spec {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  min-width: 0;
+}
+
+.catalog-spec .spec-value {
+  font-size: 15px;
+  font-weight: 600;
+  color: var(--volvo-black);
+}
+
+.catalog-spec .spec-label {
+  font-size: 10px;
+  letter-spacing: 1px;
+}
+
+.catalog-spec .catalog-spec-text {
+  font-size: 13px;
+  font-weight: 500;
+  line-height: 1.35;
+}
+
+.catalog-foot {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  margin-top: auto;
+}
+
+.catalog-meta {
+  font-size: 12.5px;
+  color: #8a8a8a;
+}
+
+.catalog-more {
+  font-size: 12.5px;
+  font-weight: 600;
+  color: var(--volvo-black);
+  white-space: nowrap;
+}
+
+.catalog-card:hover .catalog-more {
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+
+.catalog-empty {
+  padding: 60px 24px;
+  text-align: center;
+  background: rgba(255, 255, 255, 0.6);
+  border: 1px solid rgba(255, 255, 255, 0.9);
+  border-radius: 24px;
+  box-shadow: 0 4px 24px rgba(0, 0, 0, 0.05);
+}
+
+.catalog-empty h2 {
+  margin-bottom: 10px;
+  font-size: 22px;
+  color: var(--volvo-black);
+}
+
+.catalog-empty p {
+  margin-bottom: 22px;
+  font-size: 14px;
+  line-height: 1.7;
+  color: #666666;
+}
+
+@media (max-width: 1024px) {
+  .catalog-card {
+    grid-template-columns: 1fr;
+  }
+
+  .catalog-photo {
+    min-height: 220px;
+  }
+}
+
+@media (max-width: 768px) {
+  .catalog-body {
+    padding: 20px;
+    gap: 12px;
+  }
+
+  .catalog-head {
+    flex-direction: column;
+    gap: 6px;
+  }
+
+  .catalog-title {
+    font-size: 21px;
+  }
+
+  .catalog-price {
+    font-size: 20px;
+  }
+
+  .catalog-specs {
+    grid-template-columns: 1fr 1fr;
+  }
+
+  .catalog-photo {
+    min-height: 200px;
+  }
+
+  .catalog-foot {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 6px;
+  }
+}
+
+.models-all {
+  margin-top: 32px;
+  text-align: center;
+}
+
+.models-all a {
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--volvo-black);
+}
+
+.models-all a:hover {
+  text-decoration: underline;
+  text-underline-offset: 3px;
 }
