@@ -214,26 +214,51 @@ $primaryCta = is_logged()
                     </div>
 
                     <div class="car-cta">
-                        <?php if ($car['status'] === 'available'): ?>
-                            <a href="<?= e($primaryCta) ?>" class="btn btn-dark">
-                                Записаться на тест-драйв
-                            </a>
-                            <a href="booking.php?car=<?= (int) $car['id'] ?>" class="btn btn-outline-dark">
-                                Забронировать
-                            </a>
+                        <?php if (is_logged()): ?>
+                            <?php if ($car['status'] === 'available'): ?>
+                                <a href="<?= e($primaryCta) ?>" class="btn btn-dark">
+                                    Записаться на тест-драйв
+                                </a>
+                                <a href="booking.php?car=<?= (int) $car['id'] ?>" class="btn btn-outline-dark">
+                                    Забронировать
+                                </a>
+                            <?php else: ?>
+                                <a href="#" class="btn btn-dark car-btn-inactive" aria-disabled="true" onclick="return false;">
+                                    Записаться на тест-драйв
+                                </a>
+                                <a href="#" class="btn btn-outline-dark car-btn-inactive" aria-disabled="true" onclick="return false;">
+                                    Забронировать
+                                </a>
+                                <?php if ($car['status'] === 'sold'): ?>
+                                    <p class="car-unavailable-note">Этот автомобиль уже продан.</p>
+                                <?php elseif ($car['status'] === 'reserved'): ?>
+                                    <p class="car-unavailable-note">Автомобиль забронирован.</p>
+                                <?php elseif ($car['status'] === 'service'): ?>
+                                    <p class="car-unavailable-note">Автомобиль на предпродажной подготовке.</p>
+                                <?php endif; ?>
+                            <?php endif; ?>
                         <?php else: ?>
-                            <a href="#" class="btn btn-dark car-btn-inactive" aria-disabled="true" onclick="return false;">
-                                Записаться на тест-драйв
-                            </a>
-                            <a href="#" class="btn btn-outline-dark car-btn-inactive" aria-disabled="true" onclick="return false;">
-                                Забронировать
-                            </a>
-                            <?php if ($car['status'] === 'sold'): ?>
-                                <p class="car-unavailable-note">Этот автомобиль уже продан.</p>
-                            <?php elseif ($car['status'] === 'reserved'): ?>
-                                <p class="car-unavailable-note">Автомобиль забронирован.</p>
-                            <?php elseif ($car['status'] === 'service'): ?>
-                                <p class="car-unavailable-note">Автомобиль на предпродажной подготовке.</p>
+                            <?php if ($car['status'] === 'available'): ?>
+                                <a href="login.php" class="btn btn-dark">
+                                    Записаться на тест-драйв
+                                </a>
+                                <a href="login.php" class="btn btn-outline-dark">
+                                    Забронировать
+                                </a>
+                            <?php else: ?>
+                                <a href="#" class="btn btn-dark car-btn-inactive" aria-disabled="true" onclick="return false;">
+                                    Записаться на тест-драйв
+                                </a>
+                                <a href="#" class="btn btn-outline-dark car-btn-inactive" aria-disabled="true" onclick="return false;">
+                                    Забронировать
+                                </a>
+                                <?php if ($car['status'] === 'sold'): ?>
+                                    <p class="car-unavailable-note">Этот автомобиль уже продан.</p>
+                                <?php elseif ($car['status'] === 'reserved'): ?>
+                                    <p class="car-unavailable-note">Автомобиль забронирован.</p>
+                                <?php elseif ($car['status'] === 'service'): ?>
+                                    <p class="car-unavailable-note">Автомобиль на предпродажной подготовке.</p>
+                                <?php endif; ?>
                             <?php endif; ?>
                         <?php endif; ?>
                     </div>
