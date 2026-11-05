@@ -48,11 +48,11 @@
 
                 $fuelLabels     = car_fuel_labels();
                 $transmissionLabels = car_transmission_labels();
-
+                //TODO: edit car data
                 $modelRows = db()->query(
                     'SELECT m.id AS model_id, m.name AS model_name, m.body_type,
                             c.id AS car_id, c.price, c.main_image,
-                            cfg.power_hp, cfg.engine, cfg.fuel, cfg.transmission
+                            cfg.power_hp, cfg.engine, cfg.fuel, cfg.transmission, c.year
                        FROM car_models m
                        JOIN cars c ON c.model_id = m.id AND c.status = \'available\'
                   LEFT JOIN car_config cfg ON cfg.car_id = c.id
@@ -72,6 +72,7 @@
                             'engine'       => $row['engine'],
                             'fuel'         => $row['fuel'],
                             'transmission' => $row['transmission'],
+                            'year'         => $row['year'],
                             'count'        => 1,
                         ];
                     } else {
@@ -84,8 +85,10 @@
 
                 foreach ($models as $m):
                     $isElectric = ($m['fuel'] ?? '') === 'electric';
-                    $tagText    = $isElectric ? 'Электрический' : '';
+                    $tagTextEl    = $isElectric ? 'Электрический' : '';
                     $tagClass   = $isElectric ? 'electric' : '';
+                    $isNew = ($m['year'] ?? '') > 2025;
+                    $tagTextNew = !$isNew ? '' : 'Новый';
                     $powerText  = !empty($m['power_hp']) ? $fmtNum($m['power_hp']) . ' л.с.' : '—';
                     $engineText = !empty($m['engine'])
                         ? e($m['engine'])
@@ -95,8 +98,15 @@
                     <div class="model-card">
                         <div class="model-image-wrapper">
                             <img src="<?= e(car_image_url($m['main_image'])) ?>" alt="Volvo <?= e($m['model_name']) ?>" class="model-image" loading="lazy">
-                            <?php if ($tagText !== ''): ?>
-                                <span class="model-tag"><?= e($tagText) ?></span>
+                             <?php if ($tagTextEl !== '' || $tagTextNew !== ''): ?>
+                                <div class="model-tags">
+                                    <?php if ($tagTextEl !== ''): ?>
+                                        <span class="model-tag tag-electric"><?= e($tagTextEl) ?></span>
+                                    <?php endif; ?>
+                                    <?php if ($tagTextNew !== ''): ?>
+                                        <span class="model-tag tag-new"><?= e($tagTextNew) ?></span>
+                                    <?php endif; ?>
+                                </div>
                             <?php endif; ?>
                         </div>
                         <div class="model-info">
@@ -142,7 +152,7 @@
             <h2 class="section-title">Полностью электрическое <strong>будущее</strong></h2>
             <p>Volvo стремится к полному переходу на электромобили к 2030 году. Наши полностью электрические модели предлагают нулевой уровень выбросов, мгновенный крутящий момент и бесшумное вождение — без компромиссов в области безопасности и комфорта.</p>
             <div>
-                <button onclick="location.href='#'" class="btn btn-dark">Узнать больше об электромобилях</button>
+                <button onclick="location.href='electro.php'" class="btn btn-dark">Узнать больше об электромобилях</button>
             </div>
         </div>
     </section>
@@ -218,48 +228,28 @@
                 <div class="service-card">
                     <h3>Сервисное обслуживание</h3>
                     <p>Оригинальные запчасти и сертифицированные специалисты Volvo. Плановое ТО, диагностика и ремонт любой сложности.</p>
-                    <a href="#">Записаться на сервис →</a>
                 </div>
                 <div class="service-card">
                     <h3>Trade-In</h3>
                     <p>Обменяйте ваш текущий автомобиль на новый Volvo с выгодой. Бесплатная оценка и быстрое оформление сделки.</p>
-                    <a href="#">Оценить автомобиль →</a>
                 </div>
                 <div class="service-card">
                     <h3>Кредитование и лизинг</h3>
                     <p>Гибкие финансовые программы от ведущих банков-партнёров. Одобрение за 15 минут, ставки от 4.9% годовых.</p>
-                    <a href="#">Рассчитать платёж →</a>
                 </div>
                 <div class="service-card">
                     <h3>Страхование</h3>
                     <p>КАСКО и ОСАГО на специальных условиях для владельцев Volvo. Быстрое урегулирование страховых случаев.</p>
-                    <a href="#">Узнать условия →</a>
                 </div>
                 <div class="service-card">
                     <h3>Volvo On Call</h3>
                     <p>Удалённое управление автомобилем через приложение: климат-контроль, блокировка дверей, отслеживание местоположения.</p>
-                    <a href="#">Подробнее →</a>
                 </div>
                 <div class="service-card">
                     <h3>Доставка автомобиля</h3>
                     <p>Доставим ваш новый Volvo прямо к двери. Доступно по всей России с полным пакетом документов.</p>
-                    <a href="#">Оформить доставку →</a>
                 </div>
             </div>
-        </div>
-    </section>
-
-    <section class="split-section">
-        <div class="split-content" style="background: var(--volvo-blue);">
-            <span class="section-label" style="color: rgba(255,255,255,0.7);">Конфигуратор</span>
-            <h2 class="section-title" style="color: var(--volvo-white);">Создайте свой <strong>идеальный Volvo</strong></h2>
-            <p style="color: rgba(255,255,255,0.8);">Выберите модель, цвет кузова, отделку салона, колёсные диски и дополнительные опции. Соберите автомобиль мечты в нашем онлайн-конфигураторе.</p>
-            <div>
-                <button href="#" class="btn btn-primary">Открыть конфигуратор</button>
-            </div>
-        </div>
-        <div class="split-image">
-            <img src="https://images.unsplash.com/photo-1503376780353-7e6692767b70?w=960&q=80" alt="Volvo Configurator">
         </div>
     </section>
 

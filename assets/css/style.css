@@ -560,9 +560,7 @@ img {
 }
 
 .model-tag {
-  position: absolute;
-  top: 16px;
-  left: 16px;
+  display: inline-block;
   padding: 6px 14px;
   background: rgba(30, 30, 30, 0.6);
   backdrop-filter: blur(20px);
@@ -574,7 +572,15 @@ img {
   text-transform: uppercase;
   border-radius: 980px;
   border: 1px solid rgba(255, 255, 255, 0.15);
+}
+
+.model-tags {
+  position: absolute;
+  top: 16px;
+  left: 16px;
   z-index: 2;
+  display: flex;
+  gap: 8px;
 }
 
 .model-info {
