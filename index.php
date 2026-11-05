@@ -13,7 +13,7 @@
     <?php
     require "config/auth.php";
     if (is_logged()) {
-        require "includes/logged-header.php";
+        require "includes/logged_header.php";
     } else {
         require "includes/header.php";
     }
@@ -42,183 +42,93 @@
             </div>
             <div class="models-grid">
 
-                <div class="model-card">
-                    <div class="model-image-wrapper">
-                        <img src="https://images.unsplash.com/photo-1619767886558-efdc259cde1a?w=600&q=80" alt="Volvo EX90" class="model-image">
-                        <span class="model-tag">Полностью электрический</span>
-                    </div>
-                    <div class="model-info">
-                        <h3 class="model-name">EX90</h3>
-                        <p class="model-type">Полноразмерный SUV</p>
-                        <div class="model-specs">
-                            <div class="spec">
-                                <span class="spec-value">600 км</span>
-                                <span class="spec-label">Запас хода</span>
-                            </div>
-                            <div class="spec">
-                                <span class="spec-value">4.9 с</span>
-                                <span class="spec-label">0-100 км/ч</span>
-                            </div>
-                            <div class="spec">
-                                <span class="spec-value">7</span>
-                                <span class="spec-label">Мест</span>
-                            </div>
-                        </div>
-                        <p class="model-price">от <span>₽ 9 490 000</span></p>
-                        <div class="model-actions">
-                            <button onclick="location.href='#'" class="btn btn-dark">Подробнее</button>
-                            <button onclick="location.href='#'" class="btn btn-outline-dark">Конфигуратор</button>
-                        </div>
-                    </div>
-                </div>
+                <?php
+                require_once __DIR__ . '/config/db.php';
+                require_once __DIR__ . '/config/functions.php';
 
-                <div class="model-card">
-                    <div class="model-image-wrapper">
-                        <img src="https://images.unsplash.com/photo-1605559424843-9e4c228bf1c2?w=600&q=80" alt="Volvo XC90" class="model-image">
-                    </div>
-                    <div class="model-info">
-                        <h3 class="model-name">XC90</h3>
-                        <p class="model-type">Флагманский SUV</p>
-                        <div class="model-specs">
-                            <div class="spec">
-                                <span class="spec-value">300 л.с.</span>
-                                <span class="spec-label">Мощность</span>
-                            </div>
-                            <div class="spec">
-                                <span class="spec-value">6.5 с</span>
-                                <span class="spec-label">0-100 км/ч</span>
-                            </div>
-                            <div class="spec">
-                                <span class="spec-value">7</span>
-                                <span class="spec-label">Мест</span>
-                            </div>
-                        </div>
-                        <p class="model-price">от <span>₽ 7 890 000</span></p>
-                        <div class="model-actions">
-                            <button onclick="location.href='#'" class="btn btn-dark">Подробнее</button>
-                            <button onclick="location.href='#'" class="btn btn-outline-dark">Конфигуратор</button>
-                        </div>
-                    </div>
-                </div>
+                $fuelLabels     = car_fuel_labels();
+                $transmissionLabels = car_transmission_labels();
 
-                <div class="model-card">
-                    <div class="model-image-wrapper">
-                        <img src="https://images.unsplash.com/photo-1552519507-da3b142c6e3d?w=600&q=80" alt="Volvo S90" class="model-image">
-                    </div>
-                    <div class="model-info">
-                        <h3 class="model-name">S90</h3>
-                        <p class="model-type">Бизнес-седан</p>
-                        <div class="model-specs">
-                            <div class="spec">
-                                <span class="spec-value">250 л.с.</span>
-                                <span class="spec-label">Мощность</span>
-                            </div>
-                            <div class="spec">
-                                <span class="spec-value">7.0 с</span>
-                                <span class="spec-label">0-100 км/ч</span>
-                            </div>
-                            <div class="spec">
-                                <span class="spec-value">5</span>
-                                <span class="spec-label">Мест</span>
-                            </div>
-                        </div>
-                        <p class="model-price">от <span>₽ 5 490 000</span></p>
-                        <div class="model-actions">
-                            <button onclick="location.href='#'" class="btn btn-dark">Подробнее</button>
-                            <button onclick="location.href='#'" class="btn btn-outline-dark">Конфигуратор</button>
-                        </div>
-                    </div>
-                </div>
+                $modelRows = db()->query(
+                    'SELECT m.id AS model_id, m.name AS model_name, m.body_type,
+                            c.id AS car_id, c.price, c.main_image,
+                            cfg.power_hp, cfg.engine, cfg.fuel, cfg.transmission
+                       FROM car_models m
+                       JOIN cars c ON c.model_id = m.id AND c.status = \'available\'
+                  LEFT JOIN car_config cfg ON cfg.car_id = c.id
+                   ORDER BY m.name, c.price ASC'
+                )->fetchAll();
 
-                <div class="model-card">
-                    <div class="model-image-wrapper">
-                        <img src="https://images.unsplash.com/photo-1549399542-7e3f8b79c341?w=600&q=80" alt="Volvo XC60" class="model-image">
-                        <span class="model-tag">Бестселлер</span>
-                    </div>
-                    <div class="model-info">
-                        <h3 class="model-name">XC60</h3>
-                        <p class="model-type">Среднеразмерный SUV</p>
-                        <div class="model-specs">
-                            <div class="spec">
-                                <span class="spec-value">250 л.с.</span>
-                                <span class="spec-label">Мощность</span>
-                            </div>
-                            <div class="spec">
-                                <span class="spec-value">6.8 с</span>
-                                <span class="spec-label">0-100 км/ч</span>
-                            </div>
-                            <div class="spec">
-                                <span class="spec-value">5</span>
-                                <span class="spec-label">Мест</span>
-                            </div>
-                        </div>
-                        <p class="model-price">от <span>₽ 5 190 000</span></p>
-                        <div class="model-actions">
-                            <button onclick="location.href='#'" class="btn btn-dark">Подробнее</button>
-                            <button onclick="location.href='#'" class="btn btn-outline-dark">Конфигуратор</button>
-                        </div>
-                    </div>
-                </div>
+                $models = [];
+                foreach ($modelRows as $row) {
+                    $mid = $row['model_id'];
+                    if (!isset($models[$mid])) {
+                        $models[$mid] = [
+                            'model_name'   => $row['model_name'],
+                            'body_type'    => $row['body_type'] ?? '',
+                            'min_price'    => $row['price'],
+                            'main_image'   => $row['main_image'],
+                            'power_hp'     => $row['power_hp'],
+                            'engine'       => $row['engine'],
+                            'fuel'         => $row['fuel'],
+                            'transmission' => $row['transmission'],
+                            'count'        => 1,
+                        ];
+                    } else {
+                        $models[$mid]['count']++;
+                    }
+                }
 
-                <div class="model-card">
-                    <div class="model-image-wrapper">
-                        <img src="https://images.unsplash.com/photo-1583121274602-3e2820c69888?w=600&q=80" alt="Volvo V60" class="model-image">
-                    </div>
-                    <div class="model-info">
-                        <h3 class="model-name">V60 Cross Country</h3>
-                        <p class="model-type">Универсал повышенной проходимости</p>
-                        <div class="model-specs">
-                            <div class="spec">
-                                <span class="spec-value">250 л.с.</span>
-                                <span class="spec-label">Мощность</span>
-                            </div>
-                            <div class="spec">
-                                <span class="spec-value">6.9 с</span>
-                                <span class="spec-label">0-100 км/ч</span>
-                            </div>
-                            <div class="spec">
-                                <span class="spec-value">5</span>
-                                <span class="spec-label">Мест</span>
-                            </div>
-                        </div>
-                        <p class="model-price">от <span>₽ 4 690 000</span></p>
-                        <div class="model-actions">
-                            <button onclick="location.href='#'" class="btn btn-dark">Подробнее</button>
-                            <button onclick="location.href='#'" class="btn btn-outline-dark">Конфигуратор</button>
-                        </div>
-                    </div>
-                </div>
+                $fmtMoney = static fn ($v): string => number_format((float) $v, 0, ',', ' ') . ' ₽';
+                $fmtNum   = static fn ($v): string => number_format((float) $v, 0, ',', ' ');
 
-                <div class="model-card">
-                    <div class="model-image-wrapper">
-                        <img src="https://images.unsplash.com/photo-1609521263047-f8f205293f24?w=600&q=80" alt="Volvo EX30" class="model-image">
-                        <span class="model-tag">Новинка</span>
-                    </div>
-                    <div class="model-info">
-                        <h3 class="model-name">EX30</h3>
-                        <p class="model-type">Компактный электрический SUV</p>
-                        <div class="model-specs">
-                            <div class="spec">
-                                <span class="spec-value">480 км</span>
-                                <span class="spec-label">Запас хода</span>
+                foreach ($models as $m):
+                    $isElectric = ($m['fuel'] ?? '') === 'electric';
+                    $tagText    = $isElectric ? 'Электрический' : '';
+                    $tagClass   = $isElectric ? 'electric' : '';
+                    $powerText  = !empty($m['power_hp']) ? $fmtNum($m['power_hp']) . ' л.с.' : '—';
+                    $engineText = !empty($m['engine'])
+                        ? e($m['engine'])
+                        : ($fuelLabels[$m['fuel'] ?? ''] ?? '—');
+                    $transText  = $transmissionLabels[$m['transmission'] ?? ''] ?? '—';
+                ?>
+                    <div class="model-card">
+                        <div class="model-image-wrapper">
+                            <img src="<?= e(car_image_url($m['main_image'])) ?>" alt="Volvo <?= e($m['model_name']) ?>" class="model-image" loading="lazy">
+                            <?php if ($tagText !== ''): ?>
+                                <span class="model-tag"><?= e($tagText) ?></span>
+                            <?php endif; ?>
+                        </div>
+                        <div class="model-info">
+                            <h3 class="model-name"><?= e($m['model_name']) ?></h3>
+                            <p class="model-type"><?= e($m['body_type']) ?></p>
+                            <div class="model-specs">
+                                <div class="spec">
+                                    <span class="spec-value"><?= e($powerText) ?></span>
+                                    <span class="spec-label">Мощность</span>
+                                </div>
+                                <div class="spec">
+                                    <span class="spec-value"><?= e($engineText) ?></span>
+                                    <span class="spec-label">Двигатель</span>
+                                </div>
+                                <div class="spec">
+                                    <span class="spec-value"><?= e($transText) ?></span>
+                                    <span class="spec-label">Коробка</span>
+                                </div>
                             </div>
-                            <div class="spec">
-                                <span class="spec-value">5.3 с</span>
-                                <span class="spec-label">0-100 км/ч</span>
-                            </div>
-                            <div class="spec">
-                                <span class="spec-value">5</span>
-                                <span class="spec-label">Мест</span>
+                            <p class="model-price">от <span><?= e($fmtMoney($m['min_price'])) ?></span></p>
+                            <div class="model-actions">
+                                <button onclick="location.href='car.php?model=<?= urlencode($m['model_name']) ?>'" class="btn btn-dark">Подробнее</button>
+                                <button onclick="location.href='#'" class="btn btn-outline-dark">Конфигуратор</button>
                             </div>
                         </div>
-                        <p class="model-price">от <span>₽ 3 990 000</span></p>
-                        <div class="model-actions">
-                            <button onclick="location.href='#'" class="btn btn-dark">Подробнее</button>
-                            <button onclick="location.href='#'" class="btn btn-outline-dark">Конфигуратор</button>
-                        </div>
                     </div>
-                </div>
+                <?php endforeach; ?>
 
+            </div>
+
+            <div class="models-all">
+                <a href="catalog.php">Все автомобили в наличии →</a>
             </div>
         </div>
     </section>
@@ -293,7 +203,7 @@
         <div class="banner-content">
             <h2>Запишитесь на <strong>тест-драйв</strong></h2>
             <p>Почувствуйте скандинавскую роскошь и мощность Volvo лично. Запишитесь на бесплатный тест-драйв в нашем автосалоне.</p>
-            <button href="#" class="btn btn-primary">Записаться сейчас</button>
+            <a href="test-drive.php" class="btn btn-primary">Записаться сейчас</a>
         </div>
     </section>
 
