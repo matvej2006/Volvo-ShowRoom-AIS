@@ -14,12 +14,7 @@
                 <h4>Покупателям</h4>
                 <ul>
                     <li><a href="catalog.php">Все автомобили</a></li>
-                    <li><a href="#">Конфигуратор</a></li>
                     <li><a href="test-drive.php">Тест-драйв</a></li>
-                    <li><a href="#">Trade-In</a></li>
-                    <li><a href="#">Кредитование</a></li>
-                    <li><a href="#">Лизинг</a></li>
-                    <li><a href="#">Страхование</a></li>
                 </ul>
             </div>
             <div class="footer-col">
@@ -27,7 +22,7 @@
                 <ul>
                     <li>+375 (29) 123-45-67</li>
                     <li>info@volvo-car-mensk.com</li>
-                    <li>г. Москва, ул. Примерная, 1</li>
+                    <li>г. Минск, ул. Гикало, 9</li>
                     <li>Пн-Вс: 9:00 — 21:00</li>
                 </ul>
             </div>

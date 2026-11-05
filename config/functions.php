@@ -5,7 +5,7 @@ declare(strict_types=1);
 // Экранирование вывода (XSS)
 function e($value): string
 {
-    return htmlspecialchars($value ?? '', ENT_QUOTES | ENT_SUBSTITUTE | ENT_HTML5, 'UTF-8');
+    return htmlspecialchars((string) ($value ?? ''), ENT_QUOTES | ENT_SUBSTITUTE | ENT_HTML5, 'UTF-8');
 }
 
 // Редирект и остановка скрипта.
@@ -84,6 +84,60 @@ function keep_old(array $data): void
 function clear_old(): void
 {
     unset($_SESSION['_old']);
+}
+
+// Ссылка на изображение автомобиля: внешний URL, путь из assets/ или файл в assets/uploads.
+function car_image_url(?string $path): string
+{
+    $path = trim((string) $path);
+
+    if ($path === '') {
+        return 'assets/images/new_hero_xc60.jpg';
+    }
+    if (preg_match('~^https?://~i', $path) || str_starts_with($path, 'assets/')) {
+        return $path;
+    }
+
+    return 'assets/uploads/' . ltrim($path, '/');
+}
+
+// Подписи для характеристик автомобиля (используются в car.php и catalog.php).
+function car_status_labels(): array
+{
+    return [
+        'available' => ['В наличии', 'car-badge-available'],
+        'reserved'  => ['Забронирован', 'car-badge-reserved'],
+        'sold'      => ['Продан', 'car-badge-sold'],
+        'service'   => ['На обслуживании', 'car-badge-service'],
+    ];
+}
+
+function car_transmission_labels(): array
+{
+    return [
+        'auto'   => 'Автоматическая',
+        'manual' => 'Механическая',
+        'robot'  => 'Роботизированная',
+    ];
+}
+
+function car_fuel_labels(): array
+{
+    return [
+        'petrol'   => 'Бензин',
+        'diesel'   => 'Дизель',
+        'hybrid'   => 'Гибрид',
+        'electric' => 'Электро',
+    ];
+}
+
+function car_drive_labels(): array
+{
+    return [
+        'fwd' => 'Передний',
+        'rwd' => 'Задний',
+        'awd' => 'Полный',
+    ];
 }
 
 // Записать действие в журнал.

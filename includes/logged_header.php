@@ -1,7 +1,7 @@
 <header class="header" id="header">
     <div class="container">
         <nav class="nav">
-            <a href="../index.php"><img src="assets/images/volvo_new_logo-freelogovectors.net_.png" alt="" class="nav-logo"></a>
+            <a href="/Volvo_Showroom/index.php"><img src="assets/images/volvo_new_logo-freelogovectors.net_.png" alt="" class="nav-logo"></a>
             <ul class="nav-menu" id="navMenu">
                 <li><a href="index.php#models">Модели</a></li>
                 <li><a href="index.php#electric">Электрификация</a></li>
