@@ -560,7 +560,7 @@ $flashError   = flash('error');
 
 <body>
 
-    <?php require 'includes/logged-header.php'; ?>
+    <?php require 'includes/logged_header.php'; ?>
 
     <section class="cabinet-page">
         <div class="container">
@@ -661,7 +661,7 @@ $flashError   = flash('error');
                                 <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1" stroke-linecap="round" stroke-linejoin="round">
                                     <circle cx="12" cy="12" r="10"/><path d="M8 14s1.5 2 4 2 4-2 4-2"/><line x1="9" y1="9" x2="9.01" y2="9"/><line x1="15" y1="9" x2="15.01" y2="9"/>
                                 </svg>
-                                <p>Нет заявок на тест-драйв. <a href="index.php#models">Выбрать модель →</a></p>
+                                <p>Нет заявок на тест-драйв. <a href="test-drive.php">Записаться →</a></p>
                             </div>
                         <?php endif; ?>
                     </div>
