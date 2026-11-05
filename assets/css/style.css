@@ -521,37 +521,11 @@ img {
     inset 0 1px 0 rgba(255, 255, 255, 0.9);
 }
 
-.model-card::before {
-  content: "";
-  position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  height: 1px;
-  background: linear-gradient(90deg,
-      transparent,
-      rgba(255, 255, 255, 0.8),
-      transparent);
-  z-index: 1;
-}
-
-.model-card:hover {
-  box-shadow:
-    0 20px 60px rgba(0, 0, 0, 0.12),
-    inset 0 1px 0 rgba(255, 255, 255, 0.95);
-  transform: translateY(-6px) scale(1.01);
-  border-color: rgba(255, 255, 255, 0.9);
-}
-
 .model-image {
   width: 100%;
   height: 280px;
   object-fit: cover;
   transition: var(--transition);
-}
-
-.model-card:hover .model-image {
-  transform: scale(1.05);
 }
 
 .model-image-wrapper {
@@ -652,6 +626,7 @@ img {
 }
 
 .split-section {
+  background-color: #d8d8d8;
   display: grid;
   grid-template-columns: 1fr 1fr;
   min-height: 600px;
@@ -746,28 +721,6 @@ img {
   position: relative;
 }
 
-.feature-item::before {
-  content: "";
-  position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  height: 1px;
-  background: linear-gradient(90deg,
-      transparent,
-      rgba(255, 255, 255, 0.15),
-      transparent);
-}
-
-.feature-item:hover {
-  background: rgba(255, 255, 255, 0.08);
-  border-color: rgba(255, 255, 255, 0.15);
-  transform: translateY(-4px);
-  box-shadow:
-    0 12px 40px rgba(0, 0, 0, 0.2),
-    inset 0 1px 0 rgba(255, 255, 255, 0.1);
-}
-
 .feature-icon {
   width: 72px;
   height: 72px;
@@ -820,46 +773,6 @@ img {
     inset 0 1px 0 rgba(255, 255, 255, 0.95);
   position: relative;
   overflow: hidden;
-}
-
-.service-card::before {
-  content: "";
-  position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  height: 1px;
-  background: linear-gradient(90deg,
-      transparent,
-      rgba(255, 255, 255, 0.8),
-      transparent);
-}
-
-.service-card::after {
-  content: "";
-  position: absolute;
-  top: -50%;
-  left: -50%;
-  width: 200%;
-  height: 200%;
-  background: radial-gradient(circle,
-      rgba(255, 255, 255, 0.08) 0%,
-      transparent 60%);
-  opacity: 0;
-  transition: var(--transition);
-  pointer-events: none;
-}
-
-.service-card:hover::after {
-  opacity: 1;
-}
-
-.service-card:hover {
-  border-color: rgba(255, 255, 255, 0.95);
-  box-shadow:
-    0 16px 48px rgba(0, 0, 0, 0.1),
-    inset 0 1px 0 rgba(255, 255, 255, 1);
-  transform: translateY(-4px) scale(1.01);
 }
 
 .service-card h3 {
