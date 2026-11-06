@@ -9,10 +9,11 @@ ServerSignature Off
 
 # Включаем mod_rewrite и задаём базовый путь
 RewriteEngine On
-RewriteBase /
+RewriteBase /Volvo_Showroom/
 
-# Блокируем прямой доступ к служебным папкам
-RewriteRule ^(admin|config|includes|sql)/ - [F,L]
+# Блокируем прямой доступ к служебным папкам.
+# admin НЕ блокируем — там расположена панель управления.
+RewriteRule ^(config|includes|sql)/ - [F,L]
 
 # Запрет доступа к скрытым и служебным файлам
 <FilesMatch "^\.(env|git|htaccess|gitignore)$">
