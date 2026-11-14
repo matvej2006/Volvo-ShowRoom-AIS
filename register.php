@@ -70,7 +70,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     if (empty($errors)) {
         // Хэшируем пароль (bcrypt)
         $hash = password_hash($password, PASSWORD_DEFAULT);
-
+        $email = mb_strtolower(trim((string)($_POST['email'] ?? '')));
         try {
             $stmt = db()->prepare(
                 'INSERT INTO users (name, email, phone, password_hash, role)
