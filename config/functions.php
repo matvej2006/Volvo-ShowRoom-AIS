@@ -27,9 +27,10 @@ function app_base(): string
     $docRoot   = rtrim(str_replace('\\', '/', (string) ($_SERVER['DOCUMENT_ROOT'] ?? '')), '/');
     $configDir = rtrim(str_replace('\\', '/', __DIR__), '/');
 
-    if ($docRoot !== '' && str_starts_with($configDir, $docRoot)) {
-        $rel  = substr($configDir, strlen($docRoot)); // /Volvo_Showroom/config
-        $base = rtrim(dirname($rel), '/') . '/';
+    if ($docRoot !== '' && str_starts_with(strtolower($configDir), strtolower($docRoot))) {
+        $rel = substr($configDir, strlen($docRoot));      // /Volvo_Showroom/config
+        $dir = str_replace('\\', '/', dirname($rel));     // /Volvo_Showroom или /
+        $base = $dir === '/' ? '/' : rtrim($dir, '/') . '/';
         return $base;
     }
 
