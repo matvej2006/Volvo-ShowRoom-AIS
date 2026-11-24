@@ -103,16 +103,16 @@ $flashError   = flash('error');
     <link rel="stylesheet" href="assets/css/style.css">
     <style>
         :root {
-            --cabinet-bg: #0c0c0f;
-            --cabinet-surface: rgba(255, 255, 255, 0.04);
-            --cabinet-border: rgba(255, 255, 255, 0.06);
-            --cabinet-border-active: rgba(255, 255, 255, 0.12);
+            --cabinet-bg: #eef1f5;
+            --cabinet-surface: #ffffff;
+            --cabinet-border: rgba(15, 23, 42, 0.08);
+            --cabinet-border-active: rgba(15, 23, 42, 0.14);
         }
 
         .cabinet-page {
             min-height: 100vh;
             padding: 140px 0 80px;
-            background: linear-gradient(170deg, #0a0a0e 0%, #0f0f14 40%, #0c0c11 100%);
+            background: var(--cabinet-bg);
             position: relative;
             overflow: hidden;
         }
@@ -124,7 +124,7 @@ $flashError   = flash('error');
             left: 20%;
             width: 700px;
             height: 700px;
-            background: radial-gradient(circle, rgba(74, 109, 140, 0.07) 0%, transparent 70%);
+            background: radial-gradient(circle, rgba(74, 109, 140, 0.05) 0%, transparent 70%);
             pointer-events: none;
         }
 
@@ -135,7 +135,7 @@ $flashError   = flash('error');
             right: 10%;
             width: 500px;
             height: 500px;
-            background: radial-gradient(circle, rgba(74, 109, 140, 0.04) 0%, transparent 70%);
+            background: radial-gradient(circle, rgba(74, 109, 140, 0.03) 0%, transparent 70%);
             pointer-events: none;
         }
 
@@ -151,14 +151,14 @@ $flashError   = flash('error');
         /* ===== Sidebar ===== */
         .cabinet-sidebar {
             position: sticky;
-            background: rgba(255, 255, 255, 0.025);
+            background: #ffffff;
             backdrop-filter: blur(14px) saturate(140%);
             -webkit-backdrop-filter: blur(14px) saturate(140%);
             border: 1px solid var(--cabinet-border);
             border-radius: 20px;
             padding: 32px 24px 24px;
             text-align: center;
-            box-shadow: 0 2px 16px rgba(0, 0, 0, 0.15);
+            box-shadow: 0 2px 10px rgba(15, 23, 42, 0.04);
         }
 
         .cabinet-sidebar::before {
@@ -168,7 +168,7 @@ $flashError   = flash('error');
             left: 0;
             right: 0;
             height: 1px;
-            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.05), transparent);
+            background: linear-gradient(90deg, transparent, rgba(15, 23, 42, 0.05), transparent);
             border-radius: 20px 20px 0 0;
         }
 
@@ -186,14 +186,14 @@ $flashError   = flash('error');
             color: #fff;
             letter-spacing: 1px;
             box-shadow:
-                0 4px 20px rgba(0, 0, 0, 0.3),
-                inset 0 1px 0 rgba(255, 255, 255, 0.1);
+                0 6px 18px rgba(26, 26, 46, 0.18),
+                inset 0 1px 0 rgba(255, 255, 255, 0.12);
         }
 
         .cabinet-name {
             font-size: 18px;
             font-weight: 600;
-            color: #fff;
+            color: #0f172a;
             margin-bottom: 3px;
         }
 
@@ -209,26 +209,26 @@ $flashError   = flash('error');
         }
 
         .role-admin {
-            background: rgba(239, 68, 68, 0.12);
-            color: #f87171;
-            border: 1px solid rgba(239, 68, 68, 0.18);
+            background: #fee2e2;
+            color: #b91c1c;
+            border: 1px solid rgba(239, 68, 68, 0.2);
         }
 
         .role-manager {
-            background: rgba(96, 165, 250, 0.12);
-            color: #93c5fd;
-            border: 1px solid rgba(96, 165, 250, 0.18);
+            background: #dbeafe;
+            color: #1d4ed8;
+            border: 1px solid rgba(59, 130, 246, 0.2);
         }
 
         .role-client {
-            background: rgba(52, 211, 153, 0.12);
-            color: #6ee7b7;
-            border: 1px solid rgba(52, 211, 153, 0.18);
+            background: #dcfce7;
+            color: #15803d;
+            border: 1px solid rgba(34, 197, 94, 0.2);
         }
 
         .cabinet-meta {
             text-align: left;
-            border-top: 1px solid rgba(255, 255, 255, 0.06);
+            border-top: 1px solid rgba(15, 23, 42, 0.08);
             padding-top: 20px;
             margin-bottom: 20px;
         }
@@ -238,7 +238,7 @@ $flashError   = flash('error');
             justify-content: space-between;
             align-items: center;
             padding: 9px 0;
-            border-bottom: 1px solid rgba(255, 255, 255, 0.03);
+            border-bottom: 1px solid rgba(15, 23, 42, 0.06);
         }
 
         .cabinet-meta li:last-child {
@@ -247,14 +247,14 @@ $flashError   = flash('error');
 
         .cabinet-meta .meta-label {
             font-size: 11px;
-            color: rgba(255, 255, 255, 0.35);
+            color: #64748b;
             letter-spacing: 0.5px;
         }
 
         .cabinet-meta .meta-value {
             font-size: 12px;
             font-weight: 500;
-            color: rgba(255, 255, 255, 0.75);
+            color: #0f172a;
             text-align: right;
             max-width: 170px;
             overflow: hidden;
@@ -266,15 +266,15 @@ $flashError   = flash('error');
             width: 100%;
             padding: 11px 20px !important;
             font-size: 12px !important;
-            background: rgba(255, 255, 255, 0.04) !important;
-            border-color: rgba(255, 255, 255, 0.1) !important;
-            color: rgba(255, 255, 255, 0.65) !important;
+            background: #f1f5f9 !important;
+            border-color: rgba(15, 23, 42, 0.12) !important;
+            color: #334155 !important;
         }
 
         .cabinet-logout:hover {
-            background: rgba(255, 255, 255, 0.08) !important;
-            border-color: rgba(255, 255, 255, 0.2) !important;
-            color: #fff !important;
+            background: #e2e8f0 !important;
+            border-color: rgba(15, 23, 42, 0.2) !important;
+            color: #0f172a !important;
         }
 
         /* ===== Main ===== */
@@ -294,15 +294,15 @@ $flashError   = flash('error');
         }
 
         .cabinet-alert-success {
-            background: rgba(52, 211, 153, 0.08);
-            color: #6ee7b7;
-            border: 1px solid rgba(52, 211, 153, 0.15);
+            background: #dcfce7;
+            color: #15803d;
+            border: 1px solid rgba(34, 197, 94, 0.25);
         }
 
         .cabinet-alert-error {
-            background: rgba(248, 113, 113, 0.08);
-            color: #fca5a5;
-            border: 1px solid rgba(248, 113, 113, 0.15);
+            background: #fee2e2;
+            color: #b91c1c;
+            border: 1px solid rgba(239, 68, 68, 0.25);
         }
 
         /* ===== Stats ===== */
@@ -313,7 +313,7 @@ $flashError   = flash('error');
         }
 
         .cabinet-stat {
-            background: rgba(255, 255, 255, 0.03);
+            background: #ffffff;
             backdrop-filter: blur(12px) saturate(140%);
             -webkit-backdrop-filter: blur(12px) saturate(140%);
             border: 1px solid var(--cabinet-border);
@@ -321,7 +321,7 @@ $flashError   = flash('error');
             padding: 24px 20px;
             text-align: center;
             transition: all 0.35s cubic-bezier(0.25, 0.46, 0.45, 0.94);
-            box-shadow: 0 2px 12px rgba(0, 0, 0, 0.15);
+            box-shadow: 0 2px 10px rgba(15, 23, 42, 0.04);
             position: relative;
             overflow: hidden;
         }
@@ -333,20 +333,20 @@ $flashError   = flash('error');
             left: 0;
             right: 0;
             height: 1px;
-            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.06), transparent);
+            background: linear-gradient(90deg, transparent, rgba(15, 23, 42, 0.05), transparent);
         }
 
         .cabinet-stat:hover {
             border-color: var(--cabinet-border-active);
             transform: translateY(-3px);
-            box-shadow: 0 8px 28px rgba(0, 0, 0, 0.25);
+            box-shadow: 0 8px 24px rgba(15, 23, 42, 0.08);
         }
 
         .cabinet-stat .stat-num {
             display: block;
             font-size: 38px;
             font-weight: 700;
-            background: linear-gradient(135deg, #fff 0%, rgba(255, 255, 255, 0.6) 100%);
+            background: linear-gradient(135deg, #1a1a2e 0%, #4a6d8c 100%);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
             background-clip: text;
@@ -357,20 +357,20 @@ $flashError   = flash('error');
         .cabinet-stat .stat-label {
             font-size: 11px;
             font-weight: 500;
-            color: rgba(255, 255, 255, 0.35);
+            color: #64748b;
             letter-spacing: 1.5px;
             text-transform: uppercase;
         }
 
         /* ===== Panels ===== */
         .cabinet-panel {
-            background: rgba(255, 255, 255, 0.03);
+            background: #ffffff;
             backdrop-filter: blur(12px) saturate(140%);
             -webkit-backdrop-filter: blur(12px) saturate(140%);
             border: 1px solid var(--cabinet-border);
             border-radius: 20px;
             overflow: hidden;
-            box-shadow: 0 2px 16px rgba(0, 0, 0, 0.15);
+            box-shadow: 0 2px 10px rgba(15, 23, 42, 0.04);
         }
 
         .cabinet-panel-head {
@@ -378,23 +378,23 @@ $flashError   = flash('error');
             align-items: center;
             justify-content: space-between;
             padding: 20px 24px;
-            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+            border-bottom: 1px solid rgba(15, 23, 42, 0.08);
         }
 
         .cabinet-panel-head h3 {
             font-size: 16px;
             font-weight: 600;
-            color: #fff;
+            color: #0f172a;
         }
 
         .cabinet-panel-head .panel-badge {
             font-size: 11px;
             font-weight: 500;
-            color: rgba(255, 255, 255, 0.35);
+            color: #64748b;
             padding: 4px 10px;
-            background: rgba(255, 255, 255, 0.04);
+            background: #f1f5f9;
             border-radius: 980px;
-            border: 1px solid rgba(255, 255, 255, 0.06);
+            border: 1px solid rgba(15, 23, 42, 0.08);
         }
 
         /* ===== Table ===== */
@@ -411,20 +411,20 @@ $flashError   = flash('error');
         .cabinet-table thead th {
             font-size: 10px;
             font-weight: 600;
-            color: rgba(255, 255, 255, 0.3);
+            color: #64748b;
             text-transform: uppercase;
             letter-spacing: 1.5px;
             padding: 14px 24px;
             text-align: left;
-            background: rgba(0, 0, 0, 0.15);
-            border-bottom: 1px solid rgba(255, 255, 255, 0.04);
+            background: #f8fafc;
+            border-bottom: 1px solid rgba(15, 23, 42, 0.08);
         }
 
         .cabinet-table tbody td {
             padding: 16px 24px;
             font-size: 13px;
-            color: rgba(255, 255, 255, 0.8);
-            border-bottom: 1px solid rgba(255, 255, 255, 0.03);
+            color: #334155;
+            border-bottom: 1px solid rgba(15, 23, 42, 0.06);
             white-space: nowrap;
         }
 
@@ -433,18 +433,18 @@ $flashError   = flash('error');
         }
 
         .cabinet-table tbody tr:hover {
-            background: rgba(255, 255, 255, 0.02);
+            background: #f7f9fc;
         }
 
         .cell-title {
-            color: #fff;
+            color: #0f172a;
             font-weight: 500;
         }
 
         .cell-sub {
             display: block;
             font-size: 11px;
-            color: rgba(255, 255, 255, 0.3);
+            color: #94a3b8;
             margin-top: 1px;
         }
 
@@ -460,34 +460,34 @@ $flashError   = flash('error');
         }
 
         .pill-amber {
-            background: rgba(251, 191, 36, 0.12);
-            color: #fcd34d;
-            border: 1px solid rgba(251, 191, 36, 0.18);
+            background: #fff3d6;
+            color: #b45309;
+            border: 1px solid rgba(245, 158, 11, 0.25);
         }
 
         .pill-blue {
-            background: rgba(96, 165, 250, 0.12);
-            color: #93c5fd;
-            border: 1px solid rgba(96, 165, 250, 0.18);
+            background: #dbeafe;
+            color: #1d4ed8;
+            border: 1px solid rgba(59, 130, 246, 0.2);
         }
 
         .pill-green {
-            background: rgba(52, 211, 153, 0.12);
-            color: #6ee7b7;
-            border: 1px solid rgba(52, 211, 153, 0.18);
+            background: #dcfce7;
+            color: #15803d;
+            border: 1px solid rgba(34, 197, 94, 0.2);
         }
 
         .pill-muted {
-            background: rgba(255, 255, 255, 0.04);
-            color: rgba(255, 255, 255, 0.35);
-            border: 1px solid rgba(255, 255, 255, 0.06);
+            background: #eef1f5;
+            color: #94a3b8;
+            border: 1px solid rgba(15, 23, 42, 0.06);
         }
 
         /* ===== Empty ===== */
         .cabinet-empty {
             padding: 48px 24px;
             text-align: center;
-            color: rgba(255, 255, 255, 0.25);
+            color: #94a3b8;
             font-size: 13px;
         }
 
@@ -498,13 +498,13 @@ $flashError   = flash('error');
         }
 
         .cabinet-empty a {
-            color: rgba(255, 255, 255, 0.5);
+            color: #4a6d8c;
             font-weight: 600;
             transition: color 0.3s;
         }
 
         .cabinet-empty a:hover {
-            color: #fff;
+            color: #1a1a2e;
         }
 
         /* ===== Responsive ===== */
