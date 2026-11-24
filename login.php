@@ -7,7 +7,7 @@ require_once __DIR__ . '/config/functions.php';
 require_once __DIR__ . '/config/db.php';
 
 if (is_logged()) {
-    redirect('profile.php');
+    redirect_by_role();
 }
 
 // Ошибки прошлой отправки, чтобы показать их после редиректа
@@ -42,7 +42,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     if (empty($errors)) {
         log_action('user.login');
         clear_old();
-        redirect('profile.php');
+        redirect_by_role();
     }
 
     // 5. Были ошибки — сохраняем ввод и возвращаемся на форму

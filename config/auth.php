@@ -58,7 +58,7 @@ function require_login(): void
 {
     if (!is_logged()) {
         flash('error', 'Требуется вход');
-        redirect('login.php');
+        redirect(app_base() . 'login.php');
     }
 }
 
@@ -66,8 +66,24 @@ function require_role(string ...$roles): void
 {
     require_login();
     if (!in_array(current_user()['role'], $roles, true)) {
-        redirect('403.php');
+        redirect(app_base() . '403.php');
     }
+}
+
+// Направить пользователя в раздел, соответствующий его роли.
+function redirect_by_role(): never
+{
+    $role = current_user()['role'] ?? 'client';
+    $base = app_base();
+
+    if ($role === 'admin') {
+        redirect($base . 'admin/index.php');
+    }
+    if ($role === 'manager') {
+        redirect($base . 'manager/index.php');
+    }
+
+    redirect($base . 'profile.php');
 }
 
 function require_admin(): void
