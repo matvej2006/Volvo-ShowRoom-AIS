@@ -11,6 +11,11 @@
                 <li><a href="contacts.php">Контакты</a></li>
             </ul>
             <div class="nav-actions">
+                <?php if (is_admin()): ?>
+                    <button type="button" onclick="location.href='admin/index.php'" class="btn btn-outline" style="padding: 10px 20px; font-size: 12px;">Панель администратора</button>
+                <?php elseif (is_manager()): ?>
+                    <button type="button" onclick="location.href='manager/index.php'" class="btn btn-outline" style="padding: 10px 20px; font-size: 12px;">Панель менеджера</button>
+                <?php endif; ?>
                 <button type="button" onclick="location.href='profile.php'" class="btn btn-outline" style="padding: 10px 20px; font-size: 12px;">Личный кабинет</button>
                 <button type="button" onclick="location.href='logout.php'" class="btn btn-outline" style="padding: 10px 20px; font-size: 12px;">Выйти</button>
             </div>

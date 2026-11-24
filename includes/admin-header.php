@@ -1,0 +1,45 @@
+<?php
+/**
+ * Общая шапка панели администратора и менеджера.
+ * Ожидает, что config/auth.php уже подключён (current_user(), is_admin(), e()).
+ * $base — префикс пути к корню сайта (по умолчанию '../' для страниц в /admin и /manager).
+ */
+
+$base = $base ?? '../';
+$role = current_user()['role'] ?? 'client';
+$isAdminPanel = $role === 'admin';
+
+$roleTitles = [
+    'admin'   => 'Администратор',
+    'manager' => 'Менеджер',
+    'client'  => 'Клиент',
+];
+?>
+<header class="admin-header">
+    <div class="admin-header-inner">
+        <a class="admin-brand" href="<?= $base ?>index.php">
+            <span class="admin-brand-mark">V</span>
+            <span class="admin-brand-text">Volvo <em>Панель управления</em></span>
+        </a>
+
+        <nav class="admin-nav" aria-label="Навигация панели">
+            <a href="<?= $base ?><?= $isAdminPanel ? 'admin/index.php' : 'manager/index.php' ?>">Дашборд</a>
+
+            <?php if ($isAdminPanel): ?>
+                <a href="<?= $base ?>admin/cars.php">Автомобили</a>
+                <a href="<?= $base ?>admin/users.php">Сотрудники</a>
+            <?php endif; ?>
+
+            <a href="<?= $base ?>manager/leads.php">Заявки</a>
+            <a href="<?= $base ?>manager/sales.php">Продажи</a>
+            <a href="<?= $base ?>manager/clients.php">Клиенты</a>
+        </nav>
+
+        <div class="admin-user">
+            <span class="admin-user-name"><?= e(current_user()['name'] ?? '') ?></span>
+            <span class="admin-user-role"><?= e($roleTitles[$role] ?? $role) ?></span>
+            <a class="admin-link" href="<?= $base ?>index.php">На сайт</a>
+            <a class="admin-link admin-link-danger" href="<?= $base ?>logout.php">Выйти</a>
+        </div>
+    </div>
+</header>
