@@ -1,7 +1,7 @@
 <?php
 /**
- * Общая шапка панели администратора и менеджера.
- * Ожидает, что config/auth.php уже подключён (current_user(), is_admin(), e()).
+ * Общая шапка панели администратора и менеджера — в стиле основной шапки сайта.
+ * Ожидает, что config/auth.php уже подключён (current_user(), e()).
  * $base — префикс пути к корню сайта (по умолчанию '../' для страниц в /admin и /manager).
  */
 
@@ -15,11 +15,11 @@ $roleTitles = [
     'client'  => 'Клиент',
 ];
 ?>
-<header class="admin-header">
+<header class="admin-header" id="adminHeader">
     <div class="admin-header-inner">
-        <a class="admin-brand" href="<?= $base ?>index.php">
-            <span class="admin-brand-mark">V</span>
-            <span class="admin-brand-text">Volvo <em>Панель управления</em></span>
+        <a class="admin-brand">
+            <img src="<?= $base ?>assets/images/volvo_new_logo-freelogovectors.net_.png"
+                 alt="Volvo" class="admin-brand-logo">
         </a>
 
         <nav class="admin-nav" aria-label="Навигация панели">
@@ -38,8 +38,8 @@ $roleTitles = [
         <div class="admin-user">
             <span class="admin-user-name"><?= e(current_user()['name'] ?? '') ?></span>
             <span class="admin-user-role"><?= e($roleTitles[$role] ?? $role) ?></span>
-            <a class="admin-link" href="<?= $base ?>index.php">На сайт</a>
-            <a class="admin-link admin-link-danger" href="<?= $base ?>logout.php">Выйти</a>
+            <a class="admin-btn" href="<?= $base ?>index.php">На сайт</a>
+            <a class="admin-btn" href="<?= $base ?>logout.php">Выйти</a>
         </div>
     </div>
 </header>
