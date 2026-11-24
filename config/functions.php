@@ -15,6 +15,28 @@ function redirect(string $url): never
     exit;
 }
 
+// Базовый веб-путь приложения (например, /Volvo_Showroom/), чтобы редиректы
+// корректно работали из вложенных каталогов admin/ и manager/.
+function app_base(): string
+{
+    static $base = null;
+    if ($base !== null) {
+        return $base;
+    }
+
+    $docRoot   = rtrim(str_replace('\\', '/', (string) ($_SERVER['DOCUMENT_ROOT'] ?? '')), '/');
+    $configDir = rtrim(str_replace('\\', '/', __DIR__), '/');
+
+    if ($docRoot !== '' && str_starts_with($configDir, $docRoot)) {
+        $rel  = substr($configDir, strlen($docRoot)); // /Volvo_Showroom/config
+        $base = rtrim(dirname($rel), '/') . '/';
+        return $base;
+    }
+
+    $base = '/';
+    return $base;
+}
+
 // Flash-сообщения: flash('success','Текст') — записать, flash('success') — прочитать и удалить.
 function flash(string $key, ?string $message = null): ?string
 {
