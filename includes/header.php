@@ -1,5 +1,5 @@
 <header class="header" id="header">
-    <div class="container">
+    <div class="container-header">
         <nav class="nav">
             <a href="/Volvo_Showroom/index.php"><img src="assets/images/volvo_new_logo-freelogovectors.net_.png" alt="" class="nav-logo"></a>
             <ul class="nav-menu" id="navMenu">

@@ -17,7 +17,7 @@ $roleTitles = [
 ?>
 <header class="admin-header" id="adminHeader">
     <div class="admin-header-inner">
-        <a class="admin-brand">
+        <a class="admin-brand" href="/Volvo_Showroom/index.php">
             <img src="<?= $base ?>assets/images/volvo_new_logo-freelogovectors.net_.png"
                  alt="Volvo" class="admin-brand-logo">
         </a>
