@@ -475,6 +475,12 @@
   gap: 10px;
 }
 
+.quick-grid-manager {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 10px;
+}
+
 .quick {
   display: flex;
   align-items: center;

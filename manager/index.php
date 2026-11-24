@@ -79,7 +79,7 @@ $fmtDate  = static fn (?string $dt): string => $dt ? date('d.m.Y H:i', strtotime
 
         <div class="admin-page-head">
             <div>
-                <h1 class="admin-title">Дашборд <span>· менеджер</span></h1>
+                <h1 class="admin-title">Панель управления <span>· менеджер</span></h1>
                 <p class="admin-subtitle">Заявки, брони и продажи салона</p>
             </div>
             <div class="admin-date"><?= date('d.m.Y, H:i') ?></div>
@@ -175,7 +175,18 @@ $fmtDate  = static fn (?string $dt): string => $dt ? date('d.m.Y H:i', strtotime
                 <?php endif; ?>
             </section>
         </div>
-
+        <section class="panel">
+            <div class="panel-head">
+                <h2>Быстрые действия</h2>
+            </div>
+            <div class="panel-body">
+                <div class="quick-grid-manager">
+                    <a class="quick" href="../manager/leads.php">Заявки <span>→</span></a>
+                    <a class="quick" href="../manager/sales.php">Продажи <span>→</span></a>
+                    <a class="quick" href="../manager/clients.php">Клиенты <span>→</span></a>
+                </div>
+            </div>
+        </section>
     </main>
 
 </body>

@@ -137,7 +137,7 @@ $fmtDate  = static fn (?string $dt): string => $dt ? date('d.m.Y H:i', strtotime
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Панель управления — VolvoCarsBy</title>
+    <title>Панель администратора — VolvoCarsBy</title>
     <link rel="stylesheet" href="../assets/css/admin.css">
 </head>
 
@@ -149,7 +149,7 @@ $fmtDate  = static fn (?string $dt): string => $dt ? date('d.m.Y H:i', strtotime
 
         <div class="admin-page-head">
             <div>
-                <h1 class="admin-title">Дашборд <span>· обзор сайта</span></h1>
+                <h1 class="admin-title">Панель управления <span>· обзор сайта</span></h1>
                 <p class="admin-subtitle">Ключевые показатели автосалона в реальном времени</p>
             </div>
             <div class="admin-date"><?= date('d.m.Y, H:i') ?></div>
@@ -302,7 +302,7 @@ $fmtDate  = static fn (?string $dt): string => $dt ? date('d.m.Y H:i', strtotime
             </div>
             <div class="panel-body">
                 <div class="quick-grid">
-                    <a class="quick" href="car-form.php">Добавить авто <span>→</span></a>
+                    <a class="quick" href="car_form.php">Добавить авто <span>→</span></a>
                     <a class="quick" href="cars.php">Автомобили <span>→</span></a>
                     <a class="quick" href="users.php">Сотрудники <span>→</span></a>
                     <a class="quick" href="../manager/leads.php">Заявки <span>→</span></a>
