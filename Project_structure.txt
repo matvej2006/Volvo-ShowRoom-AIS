@@ -16,7 +16,7 @@ volvo-dealership/
 ├── /admin                     # Панель админа
 │   ├── index.php              # Дашборд
 │   ├── cars.php               # Список авто
-│   ├── car_form.php           # Добавить/редактировать/удалить
+│   ├── car_form.php           # Добавить
 │   ├── car_edit.php           # Редактировать авто
 │   ├── users.php              # Сотрудники (только админ)
 │   └── user-form.php          # Создать сотрудника
