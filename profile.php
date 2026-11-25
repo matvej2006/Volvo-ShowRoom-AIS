@@ -88,7 +88,7 @@ $paymentLabels = [
 
 $fmtDate     = static fn (?string $dt): string => $dt ? date('d.m.Y', strtotime($dt)) : '—';
 $fmtDateTime = static fn (?string $dt): string => $dt ? date('d.m.Y H:i', strtotime($dt)) : '—';
-$fmtMoney    = static fn ($v): string => number_format((float) $v, 0, ',', ' ') . ' ₽';
+$fmtMoney    = static fn ($v): string => number_format((float) $v, 0, ',', ' ') . ' Br';
 
 $flashSuccess = flash('success');
 $flashError   = flash('error');

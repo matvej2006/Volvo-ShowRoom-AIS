@@ -81,7 +81,7 @@
                     }
                 }
 
-                $fmtMoney = static fn ($v): string => number_format((float) $v, 0, ',', ' ') . ' ₽';
+                $fmtMoney = static fn ($v): string => number_format((float) $v, 0, ',', ' ') . ' Br';
                 $fmtNum   = static fn ($v): string => number_format((float) $v, 0, ',', ' ');
 
                 foreach ($models as $m):

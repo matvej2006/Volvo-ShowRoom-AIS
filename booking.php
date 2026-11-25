@@ -99,7 +99,7 @@ foreach ($cars as $item) {
     }
 }
 
-$fmtMoney      = static fn($v): string => number_format((float) $v, 0, ',', ' ') . ' ₽';
+$fmtMoney      = static fn($v): string => number_format((float) $v, 0, ',', ' ') . ' Br';
 $flashSuccess  = flash('success');
 
 ?>

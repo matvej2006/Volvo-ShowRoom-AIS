@@ -127,7 +127,7 @@ $actionLabels = [
     'test_drive.create' => 'Тест-драйв',
 ];
 
-$fmtMoney = static fn (float $v): string => number_format($v, 0, ',', ' ') . ' ₽';
+$fmtMoney = static fn (float $v): string => number_format($v, 0, ',', ' ') . ' Br';
 $fmtDate  = static fn (?string $dt): string => $dt ? date('d.m.Y H:i', strtotime($dt)) : '—';
 
 ?>

@@ -65,7 +65,7 @@ $transmissionLabels = car_transmission_labels();
 $fuelLabels         = car_fuel_labels();
 $driveLabels        = car_drive_labels();
 
-$fmtMoney  = static fn (float $v): string => number_format($v, 0, ',', ' ') . ' ₽';
+$fmtMoney  = static fn (float $v): string => number_format($v, 0, ',', ' ') . ' Br';
 $fmtNumber = static fn (int $v): string => number_format($v, 0, ',', ' ');
 
 // Путь к изображению, корректный из подкаталога /admin

@@ -72,7 +72,7 @@ $stmt = db()->prepare(
 $stmt->execute([(int) $car['id'], (float) $car['price']]);
 $similar = $stmt->fetchAll();
 
-$fmtMoney  = static fn($value): string => number_format((float) $value, 0, ',', ' ') . ' ₽';
+$fmtMoney  = static fn($value): string => number_format((float) $value, 0, ',', ' ') . ' Br';
 $fmtNumber = static fn($value): string => number_format((float) $value, 0, ',', ' ');
 
 $price = $fmtMoney($car['price']);

@@ -21,7 +21,7 @@ $electricCars = db()->query(
    ORDER BY m.name, c.price ASC'
 )->fetchAll();
 
-$fmtMoney  = static fn ($v): string => number_format((float) $v, 0, ',', ' ') . ' ₽';
+$fmtMoney  = static fn ($v): string => number_format((float) $v, 0, ',', ' ') . ' Br';
 $fmtNumber = static fn ($v): string => number_format((float) $v, 0, ',', ' ');
 ?>
 <!DOCTYPE html>
