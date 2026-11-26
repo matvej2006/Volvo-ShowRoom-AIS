@@ -1275,3 +1275,9 @@
   gap: 6px;
   justify-content: center;
 }
+
+.a-btn-sm {
+  padding: 6px 12px;
+  font-size: 12px;
+  white-space: nowrap;
+}
