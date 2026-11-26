@@ -4,6 +4,7 @@ volvo-dealership/
 ├── car.php                    # Карточка авто
 ├── test-drive.php             # Запись на тест-драйв
 ├── contacts.php               # Контакты
+├── favorites.php              # Избранное
 │
 ├── login.php                  # Вход
 ├── register.php               # Регистрация клиента
