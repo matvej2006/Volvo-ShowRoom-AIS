@@ -27,12 +27,15 @@ $roleTitles = [
 
             <?php if ($isAdminPanel): ?>
                 <a href="<?= $base ?>admin/cars.php">Автомобили</a>
-                <a href="<?= $base ?>admin/users.php">Сотрудники</a>
             <?php endif; ?>
 
             <a href="<?= $base ?>manager/leads.php">Заявки</a>
             <a href="<?= $base ?>manager/sales.php">Продажи</a>
-            <a href="<?= $base ?>manager/clients.php">Клиенты</a>
+            <?php if (is_admin()): ?>
+                <a href="<?= $base ?>admin/users.php">Все пользователи</a>
+            <?php elseif (is_manager()): ?>
+                <a href="<?= $base ?>manager/clients.php">Клиенты</a>
+            <?php endif; ?>
         </nav>
 
         <div class="admin-user">
