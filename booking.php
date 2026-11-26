@@ -111,6 +111,7 @@ $flashSuccess  = flash('success');
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Бронирование — VolvoCarsBy</title>
     <link rel="stylesheet" href="assets/css/style.css">
+    <link rel="stylesheet" href="assets/css/custom-select.css">
 </head>
 
 <body>
@@ -295,6 +296,8 @@ $flashSuccess  = flash('success');
             updatePreview();
         }
     </script>
+
+    <script src="assets/js/custom-select.js"></script>
 
 </body>
 
