@@ -298,7 +298,7 @@ if ($car !== null && $_SERVER['REQUEST_METHOD'] === 'POST') {
 $flashSuccess = flash('success');
 
 /* ---------- Вспомогательные значения для шаблона ---------- */
-$fmtMoney = static fn (float $v): string => number_format($v, 0, ',', ' ') . ' ₽';
+$fmtMoney = static fn (float $v): string => number_format($v, 0, ',', ' ') . ' Br';
 
 $imgUrl = static function (?string $path): string {
     $src = car_image_url($path);
@@ -327,6 +327,7 @@ foreach ($models as $m) {
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Редактирование авто — VolvoCarsBy</title>
     <link rel="stylesheet" href="../assets/css/admin.css">
+    <link rel="stylesheet" href="../assets/css/custom-select.css">
 </head>
 
 <body class="admin-body">
@@ -399,6 +400,12 @@ foreach ($models as $m) {
 
                         <div class="a-form-row">
                             <div class="a-field">
+                                <label for="vin">VIN</label>
+                                <input type="text" id="vin" name="vin" class="a-input"
+                                       value="<?= e((string) $car['vin']) ?>" readonly>
+                                <span class="a-field-hint">VIN присваивается при добавлении и не редактируется.</span>
+                            </div>
+                            <div class="a-field">
                                 <label for="status">Статус</label>
                                 <select id="status" name="status" class="a-select">
                                     <?php foreach ($statusOptions as $val => $label): ?>
@@ -410,12 +417,6 @@ foreach ($models as $m) {
                                 <?php if (isset($errors['status'])): ?>
                                     <span class="a-field-error"><?= e($errors['status']) ?></span>
                                 <?php endif; ?>
-                            </div>
-                            <div class="a-field">
-                                <label for="vin">VIN</label>
-                                <input type="text" id="vin" name="vin" class="a-input"
-                                       value="<?= e((string) $car['vin']) ?>" readonly>
-                                <span class="a-field-hint">VIN присваивается при добавлении и не редактируется.</span>
                             </div>
                         </div>
 
@@ -429,7 +430,7 @@ foreach ($models as $m) {
                                 <?php endif; ?>
                             </div>
                             <div class="a-field">
-                                <label for="price">Цена, ₽</label>
+                                <label for="price">Цена, Br</label>
                                 <input type="text" id="price" name="price" class="a-input" inputmode="decimal"
                                        value="<?= e((string) $values['price']) ?>" required>
                                 <?php if (isset($errors['price'])): ?>
@@ -637,7 +638,7 @@ foreach ($models as $m) {
                         if (isNaN(n)) {
                             return '—';
                         }
-                        return n.toLocaleString('ru-RU', { maximumFractionDigits: 0 }) + ' ₽';
+                        return n.toLocaleString('ru-RU', { maximumFractionDigits: 0 }) + ' Br';
                     }
 
                     function imgSrc(path) {
@@ -684,6 +685,8 @@ foreach ($models as $m) {
         <?php endif; ?>
 
     </main>
+
+    <script src="../assets/js/custom-select.js"></script>
 
 </body>
 
