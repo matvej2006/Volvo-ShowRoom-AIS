@@ -182,7 +182,10 @@ if ($isDeleted) {
                 <h1 class="admin-title">Автомобили <span>· реестр автосалона</span></h1>
                 <p class="admin-subtitle"><?= $isFiltered ? 'Найдено' : 'Всего' ?> автомобилей: <?= count($cars) ?></p>
             </div>
-            <div class="admin-date"><?= date('d.m.Y, H:i') ?></div>
+            <div style="display:flex; align-items:center; gap:12px; flex-wrap:wrap;">
+                <a class="a-btn a-btn-primary" href="car_form.php">+ Добавить авто</a>
+                <div class="admin-date"><?= date('d.m.Y, H:i') ?></div>
+            </div>
         </div>
 
         <form class="panel users-toolbar-panel" method="get" action="cars.php">

@@ -2315,3 +2315,55 @@ a.contact-value:hover {
   text-decoration: underline;
   text-underline-offset: 3px;
 }
+
+/* ---------- Catalog toolbar (search / filter / sort) ---------- */
+.catalog-toolbar {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: flex-end;
+  gap: 14px;
+  margin: 0 0 28px;
+  padding: 18px;
+  background: rgba(255, 255, 255, 0.65);
+  border: 1px solid rgba(255, 255, 255, 0.9);
+  border-radius: 20px;
+  box-shadow: 0 4px 24px rgba(0, 0, 0, 0.05);
+}
+
+.catalog-toolbar .field {
+  flex: 1 1 200px;
+  margin-bottom: 0;
+}
+
+.catalog-toolbar .field:first-child {
+  flex: 2 1 280px;
+}
+
+.catalog-toolbar-actions {
+  display: flex;
+  gap: 8px;
+}
+
+.catalog-toolbar .btn {
+  white-space: nowrap;
+}
+
+@media (max-width: 720px) {
+  .catalog-toolbar {
+    flex-direction: column;
+    align-items: stretch;
+    padding: 16px;
+  }
+
+  .catalog-toolbar .field {
+    flex: 1 1 auto;
+  }
+
+  .catalog-toolbar-actions {
+    width: 100%;
+  }
+
+  .catalog-toolbar-actions .btn {
+    flex: 1;
+  }
+}
