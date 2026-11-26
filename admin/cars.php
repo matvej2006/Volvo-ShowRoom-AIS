@@ -42,24 +42,90 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && ($_POST['action'] ?? '') === 'delet
     redirect(app_base() . 'admin/cars.php?delete_error=' . urlencode($error));
 }
 
-/* ---------- Список автомобилей ---------- */
-$cars = $pdo->query(
-    "SELECT c.id, c.vin, c.year, c.price, c.mileage, c.color, c.status, c.main_image,
-            m.name AS model_name, m.body_type,
-            cfg.engine, cfg.power_hp, cfg.transmission, cfg.fuel, cfg.drive
-       FROM cars c
-       JOIN car_models m ON m.id = c.model_id
-  LEFT JOIN car_config cfg ON cfg.car_id = c.id
-   ORDER BY FIELD(c.status, 'available', 'reserved', 'service', 'sold'), m.name, c.year DESC"
-)->fetchAll();
-
-/* ---------- Подписи и форматирование ---------- */
+/* ---------- Подписи статусов ---------- */
 $statusMap = [
     'available' => ['В наличии', 'pill-confirmed'],
     'reserved'  => ['Забронирован', 'pill-new'],
     'sold'      => ['Продан', 'pill-canceled'],
     'service'   => ['На обслуживании', 'pill-progress'],
 ];
+$statusOptions = [];
+foreach ($statusMap as $key => $meta) {
+    $statusOptions[$key] = $meta[0];
+}
+
+/* ---------- Поиск, фильтр и сортировка ---------- */
+$search       = trim((string) ($_GET['search'] ?? ''));
+$statusFilter = (string) ($_GET['status'] ?? '');
+$sortParam    = (string) ($_GET['sort'] ?? '');
+
+if (mb_strlen($search) > 100) {
+    $search = mb_substr($search, 0, 100);
+}
+if (!isset($statusOptions[$statusFilter])) {
+    $statusFilter = '';
+}
+
+$sortOptions = [
+    ''             => 'По умолчанию',
+    'model_asc'    => 'Модель: А–Я',
+    'model_desc'   => 'Модель: Я–А',
+    'year_desc'    => 'Год: новые сначала',
+    'year_asc'     => 'Год: старые сначала',
+    'price_asc'    => 'Цена: по возрастанию',
+    'price_desc'   => 'Цена: по убыванию',
+    'mileage_asc'  => 'Пробег: по возрастанию',
+    'mileage_desc' => 'Пробег: по убыванию',
+];
+if (!isset($sortOptions[$sortParam])) {
+    $sortParam = '';
+}
+
+$where  = [];
+$params = [];
+if ($search !== '') {
+    $like = '%' . addcslashes($search, "\\%_") . '%';
+    $where[]  = '(m.name LIKE ? OR c.vin LIKE ?)';
+    $params[] = $like;
+    $params[] = $like;
+}
+if ($statusFilter !== '') {
+    $where[]  = 'c.status = ?';
+    $params[] = $statusFilter;
+}
+
+$orderSql = "ORDER BY FIELD(c.status, 'available', 'reserved', 'service', 'sold'), m.name, c.year DESC";
+if ($sortParam !== '') {
+    $parts = explode('_', $sortParam, 2);
+    $sortColumns = [
+        'model'   => 'm.name',
+        'year'    => 'c.year',
+        'price'   => 'c.price',
+        'mileage' => 'c.mileage',
+    ];
+    $sortColumn = $sortColumns[$parts[0]] ?? 'm.name';
+    $sortDirSql = (($parts[1] ?? 'asc') === 'asc') ? 'ASC' : 'DESC';
+    $orderSql   = 'ORDER BY ' . $sortColumn . ' ' . $sortDirSql . ', c.id DESC';
+}
+
+$sql = 'SELECT c.id, c.vin, c.year, c.price, c.mileage, c.color, c.status, c.main_image,
+               m.name AS model_name, m.body_type,
+               cfg.engine, cfg.power_hp, cfg.transmission, cfg.fuel, cfg.drive
+          FROM cars c
+          JOIN car_models m ON m.id = c.model_id
+     LEFT JOIN car_config cfg ON cfg.car_id = c.id';
+if ($where !== []) {
+    $sql .= ' WHERE ' . implode(' AND ', $where);
+}
+$sql .= ' ' . $orderSql;
+
+$stmt = $pdo->prepare($sql);
+$stmt->execute($params);
+$cars = $stmt->fetchAll();
+
+$isFiltered = ($search !== '' || $statusFilter !== '' || $sortParam !== '');
+
+/* ---------- Форматирование ---------- */
 
 $transmissionLabels = car_transmission_labels();
 $fuelLabels         = car_fuel_labels();
@@ -102,6 +168,7 @@ if ($isDeleted) {
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Автомобили — VolvoCarsBy</title>
     <link rel="stylesheet" href="../assets/css/admin.css">
+    <link rel="stylesheet" href="../assets/css/custom-select.css">
 </head>
 
 <body class="admin-body">
@@ -113,10 +180,47 @@ if ($isDeleted) {
         <div class="admin-page-head">
             <div>
                 <h1 class="admin-title">Автомобили <span>· реестр автосалона</span></h1>
-                <p class="admin-subtitle">Всего автомобилей: <?= count($cars) ?></p>
+                <p class="admin-subtitle"><?= $isFiltered ? 'Найдено' : 'Всего' ?> автомобилей: <?= count($cars) ?></p>
             </div>
             <div class="admin-date"><?= date('d.m.Y, H:i') ?></div>
         </div>
+
+        <form class="panel users-toolbar-panel" method="get" action="cars.php">
+            <div class="panel-body">
+                <div class="users-toolbar">
+                    <div class="a-field">
+                        <label for="search">Поиск по модели или VIN</label>
+                        <input type="text" id="search" name="search" class="a-input" maxlength="100"
+                               value="<?= e($search) ?>" placeholder="Например, XC60 или VIN">
+                    </div>
+                    <div class="a-field">
+                        <label for="status">Статус</label>
+                        <select id="status" name="status" class="a-select">
+                            <option value="">Все статусы</option>
+                            <?php foreach ($statusOptions as $val => $label): ?>
+                                <option value="<?= e($val) ?>" <?= $statusFilter === $val ? 'selected' : '' ?>>
+                                    <?= e($label) ?>
+                                </option>
+                            <?php endforeach; ?>
+                        </select>
+                    </div>
+                    <div class="a-field">
+                        <label for="sort">Сортировка</label>
+                        <select id="sort" name="sort" class="a-select">
+                            <?php foreach ($sortOptions as $val => $label): ?>
+                                <option value="<?= e($val) ?>" <?= $sortParam === $val ? 'selected' : '' ?>>
+                                    <?= e($label) ?>
+                                </option>
+                            <?php endforeach; ?>
+                        </select>
+                    </div>
+                    <div class="users-toolbar-actions">
+                        <button type="submit" class="a-btn a-btn-primary">Применить</button>
+                        <a class="a-btn a-btn-ghost" href="cars.php">Сбросить</a>
+                    </div>
+                </div>
+            </div>
+        </form>
 
         <?php if ($cars): ?>
             <div class="car-grid">
@@ -186,7 +290,12 @@ if ($isDeleted) {
             </div>
         <?php else: ?>
             <section class="panel">
-                <div class="empty">В реестре пока нет автомобилей</div>
+                <div class="empty">
+                    Ничего не найдено.
+                    <?php if ($isFiltered): ?>
+                        <a href="cars.php">Сбросить фильтры</a>
+                    <?php endif; ?>
+                </div>
             </section>
         <?php endif; ?>
 
@@ -250,6 +359,8 @@ if ($isDeleted) {
             })();
         </script>
     <?php endif; ?>
+
+    <script src="../assets/js/custom-select.js"></script>
 
 </body>
 
